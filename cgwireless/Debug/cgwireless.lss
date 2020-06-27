@@ -1,0 +1,1407 @@
+
+cgwireless.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000000c  00800100  0000085a  000008ee  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000085a  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000003  0080010c  0080010c  000008fa  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000008fa  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000092c  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000498  00000000  00000000  0000096c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000040e8  00000000  00000000  00000e04  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00001073  00000000  00000000  00004eec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00001e75  00000000  00000000  00005f5f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000a7c  00000000  00000000  00007dd4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000f19  00000000  00000000  00008850  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000285f  00000000  00000000  00009769  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000470  00000000  00000000  0000bfc8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ea e5       	ldi	r30, 0x5A	; 90
+  7c:	f8 e0       	ldi	r31, 0x08	; 8
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	ac 30       	cpi	r26, 0x0C	; 12
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	ac e0       	ldi	r26, 0x0C	; 12
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	af 30       	cpi	r26, 0x0F	; 15
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 cb 02 	call	0x596	; 0x596 <main>
+  9e:	0c 94 2b 04 	jmp	0x856	; 0x856 <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <config_buttons>:
+#define BTN0 PC5
+
+void config_buttons(void)
+{
+	// setup buttons for input.
+	DDRC &= ~(1 << BTN0);
+  a6:	3d 98       	cbi	0x07, 5	; 7
+  a8:	08 95       	ret
+
+000000aa <button1_down>:
+}
+
+// returns true when button 1 is pressed.
+bool button1_down(void)
+{
+	return !(PINC & (1 << BTN0));
+  aa:	86 b1       	in	r24, 0x06	; 6
+  ac:	85 fb       	bst	r24, 5
+  ae:	88 27       	eor	r24, r24
+  b0:	80 f9       	bld	r24, 0
+  b2:	91 e0       	ldi	r25, 0x01	; 1
+  b4:	89 27       	eor	r24, r25
+  b6:	08 95       	ret
+
+000000b8 <oled_config>:
+}
+
+// switch to graphics mode.
+void oled_graphics_mode()
+{
+	oled_write_cmd(CMD_MODE | CMD_MODE_GFX | CMD_MODE_POWER | CMD_MODE_GFX_FLAG);
+  b8:	50 9a       	sbi	0x0a, 0	; 10
+  ba:	51 9a       	sbi	0x0a, 1	; 10
+  bc:	52 9a       	sbi	0x0a, 2	; 10
+  be:	53 9a       	sbi	0x0a, 3	; 10
+  c0:	54 9a       	sbi	0x0a, 4	; 10
+  c2:	55 9a       	sbi	0x0a, 5	; 10
+  c4:	56 9a       	sbi	0x0a, 6	; 10
+  c6:	57 9a       	sbi	0x0a, 7	; 10
+  c8:	22 9a       	sbi	0x04, 2	; 4
+  ca:	21 9a       	sbi	0x04, 1	; 4
+  cc:	20 9a       	sbi	0x04, 0	; 4
+  ce:	08 95       	ret
+
+000000d0 <busy_wait>:
+  d0:	57 98       	cbi	0x0a, 7	; 10
+  d2:	2a 98       	cbi	0x05, 2	; 5
+  d4:	29 9a       	sbi	0x05, 1	; 5
+  d6:	28 9a       	sbi	0x05, 0	; 5
+  d8:	28 98       	cbi	0x05, 0	; 5
+  da:	4f 99       	sbic	0x09, 7	; 9
+  dc:	fc cf       	rjmp	.-8      	; 0xd6 <busy_wait+0x6>
+  de:	57 9a       	sbi	0x0a, 7	; 10
+  e0:	29 98       	cbi	0x05, 1	; 5
+  e2:	08 95       	ret
+
+000000e4 <set_data_bus>:
+  e4:	88 23       	and	r24, r24
+  e6:	14 f4       	brge	.+4      	; 0xec <set_data_bus+0x8>
+  e8:	5f 9a       	sbi	0x0b, 7	; 11
+  ea:	01 c0       	rjmp	.+2      	; 0xee <set_data_bus+0xa>
+  ec:	5f 98       	cbi	0x0b, 7	; 11
+  ee:	86 ff       	sbrs	r24, 6
+  f0:	02 c0       	rjmp	.+4      	; 0xf6 <set_data_bus+0x12>
+  f2:	5e 9a       	sbi	0x0b, 6	; 11
+  f4:	01 c0       	rjmp	.+2      	; 0xf8 <set_data_bus+0x14>
+  f6:	5e 98       	cbi	0x0b, 6	; 11
+  f8:	85 ff       	sbrs	r24, 5
+  fa:	02 c0       	rjmp	.+4      	; 0x100 <set_data_bus+0x1c>
+  fc:	5d 9a       	sbi	0x0b, 5	; 11
+  fe:	01 c0       	rjmp	.+2      	; 0x102 <set_data_bus+0x1e>
+ 100:	5d 98       	cbi	0x0b, 5	; 11
+ 102:	84 ff       	sbrs	r24, 4
+ 104:	02 c0       	rjmp	.+4      	; 0x10a <set_data_bus+0x26>
+ 106:	5c 9a       	sbi	0x0b, 4	; 11
+ 108:	01 c0       	rjmp	.+2      	; 0x10c <set_data_bus+0x28>
+ 10a:	5c 98       	cbi	0x0b, 4	; 11
+ 10c:	83 ff       	sbrs	r24, 3
+ 10e:	02 c0       	rjmp	.+4      	; 0x114 <set_data_bus+0x30>
+ 110:	5b 9a       	sbi	0x0b, 3	; 11
+ 112:	01 c0       	rjmp	.+2      	; 0x116 <set_data_bus+0x32>
+ 114:	5b 98       	cbi	0x0b, 3	; 11
+ 116:	82 ff       	sbrs	r24, 2
+ 118:	02 c0       	rjmp	.+4      	; 0x11e <set_data_bus+0x3a>
+ 11a:	5a 9a       	sbi	0x0b, 2	; 11
+ 11c:	01 c0       	rjmp	.+2      	; 0x120 <set_data_bus+0x3c>
+ 11e:	5a 98       	cbi	0x0b, 2	; 11
+ 120:	81 ff       	sbrs	r24, 1
+ 122:	02 c0       	rjmp	.+4      	; 0x128 <set_data_bus+0x44>
+ 124:	59 9a       	sbi	0x0b, 1	; 11
+ 126:	01 c0       	rjmp	.+2      	; 0x12a <set_data_bus+0x46>
+ 128:	59 98       	cbi	0x0b, 1	; 11
+ 12a:	80 ff       	sbrs	r24, 0
+ 12c:	02 c0       	rjmp	.+4      	; 0x132 <set_data_bus+0x4e>
+ 12e:	58 9a       	sbi	0x0b, 0	; 11
+ 130:	08 95       	ret
+ 132:	58 98       	cbi	0x0b, 0	; 11
+ 134:	08 95       	ret
+
+00000136 <oled_write_cmd_busy>:
+ 136:	cf 93       	push	r28
+ 138:	c8 2f       	mov	r28, r24
+ 13a:	61 11       	cpse	r22, r1
+ 13c:	0e 94 68 00 	call	0xd0	; 0xd0 <busy_wait>
+ 140:	8c 2f       	mov	r24, r28
+ 142:	0e 94 72 00 	call	0xe4	; 0xe4 <set_data_bus>
+ 146:	2a 98       	cbi	0x05, 2	; 5
+ 148:	29 98       	cbi	0x05, 1	; 5
+ 14a:	28 9a       	sbi	0x05, 0	; 5
+ 14c:	28 98       	cbi	0x05, 0	; 5
+ 14e:	cf 91       	pop	r28
+ 150:	08 95       	ret
+
+00000152 <oled_write_cmd>:
+ 152:	61 e0       	ldi	r22, 0x01	; 1
+ 154:	0e 94 9b 00 	call	0x136	; 0x136 <oled_write_cmd_busy>
+ 158:	08 95       	ret
+
+0000015a <oled_clear>:
+ 15a:	81 e0       	ldi	r24, 0x01	; 1
+ 15c:	0e 94 a9 00 	call	0x152	; 0x152 <oled_write_cmd>
+ 160:	08 95       	ret
+
+00000162 <oled_cursor_home>:
+ 162:	82 e0       	ldi	r24, 0x02	; 2
+ 164:	0e 94 a9 00 	call	0x152	; 0x152 <oled_write_cmd>
+ 168:	08 95       	ret
+
+0000016a <oled_incremental_cursor>:
+ 16a:	86 e0       	ldi	r24, 0x06	; 6
+ 16c:	0e 94 a9 00 	call	0x152	; 0x152 <oled_write_cmd>
+ 170:	08 95       	ret
+
+00000172 <oled_power_on>:
+
+
+// switch the OLED on.
+void oled_power_on()
+{
+	oled_write_cmd(CMD_DISPLAY_CONTROL | CMD_DISPLAY_POWER);
+ 172:	8c e0       	ldi	r24, 0x0C	; 12
+ 174:	0e 94 a9 00 	call	0x152	; 0x152 <oled_write_cmd>
+ 178:	08 95       	ret
+
+0000017a <oled_power_off>:
+}
+
+// switch the OLED on.
+void oled_power_off()
+{
+	oled_write_cmd(CMD_DISPLAY_CONTROL);
+ 17a:	88 e0       	ldi	r24, 0x08	; 8
+ 17c:	0e 94 a9 00 	call	0x152	; 0x152 <oled_write_cmd>
+ 180:	08 95       	ret
+
+00000182 <oled_write_data>:
+}
+
+
+// Writes the given data to DDRAM or CGRAM.
+void oled_write_data(uint8_t data)
+{
+ 182:	cf 93       	push	r28
+ 184:	c8 2f       	mov	r28, r24
+	busy_wait();
+ 186:	0e 94 68 00 	call	0xd0	; 0xd0 <busy_wait>
+
+	 // Set the data bus.
+	set_data_bus(data);
+ 18a:	8c 2f       	mov	r24, r28
+ 18c:	0e 94 72 00 	call	0xe4	; 0xe4 <set_data_bus>
+
+	// 1 - data register.
+	OLED_PORT_RS |= (1 << OLED_RS);
+ 190:	2a 9a       	sbi	0x05, 2	; 5
+
+	// 0 - write.
+	OLED_PORT_RW &= ~(1 << OLED_RW);
+ 192:	29 98       	cbi	0x05, 1	; 5
+
+	 // Pulse the enable. (on, off)
+	OLED_PORT_EN |= (1 << OLED_EN);
+ 194:	28 9a       	sbi	0x05, 0	; 5
+	OLED_PORT_EN &= ~(1 << OLED_EN);
+ 196:	28 98       	cbi	0x05, 0	; 5
+}
+ 198:	cf 91       	pop	r28
+ 19a:	08 95       	ret
+
+0000019c <get_ddram_address_n1>:
+// displays using case N1. (see comments at top).
+uint8_t get_ddram_address_n1(uint8_t column_n, uint8_t row_n)
+{
+	uint8_t addr = 0x00;
+
+	if (row_n == 2)
+ 19c:	62 30       	cpi	r22, 0x02	; 2
+ 19e:	11 f4       	brne	.+4      	; 0x1a4 <get_ddram_address_n1+0x8>
+	{
+		addr = 0x40;
+ 1a0:	20 e4       	ldi	r18, 0x40	; 64
+ 1a2:	01 c0       	rjmp	.+2      	; 0x1a6 <get_ddram_address_n1+0xa>
+
+// gets the address for the given column and row.
+// displays using case N1. (see comments at top).
+uint8_t get_ddram_address_n1(uint8_t column_n, uint8_t row_n)
+{
+	uint8_t addr = 0x00;
+ 1a4:	20 e0       	ldi	r18, 0x00	; 0
+	if (row_n == 2)
+	{
+		addr = 0x40;
+	}
+
+	if (column_n > 1 && column_n <= 40)
+ 1a6:	9e ef       	ldi	r25, 0xFE	; 254
+ 1a8:	98 0f       	add	r25, r24
+ 1aa:	97 32       	cpi	r25, 0x27	; 39
+ 1ac:	18 f4       	brcc	.+6      	; 0x1b4 <get_ddram_address_n1+0x18>
+	{
+		addr |= (column_n - 1);
+ 1ae:	9f ef       	ldi	r25, 0xFF	; 255
+ 1b0:	98 0f       	add	r25, r24
+ 1b2:	29 2b       	or	r18, r25
+	}
+
+	return addr;
+}
+ 1b4:	82 2f       	mov	r24, r18
+ 1b6:	08 95       	ret
+
+000001b8 <oled_write_character>:
+}
+
+// write character at given position.
+// column and row are 1 based.
+void oled_write_character(uint8_t character, uint8_t column, uint8_t row)
+{
+ 1b8:	cf 93       	push	r28
+ 1ba:	c8 2f       	mov	r28, r24
+ 1bc:	86 2f       	mov	r24, r22
+	uint8_t addr = get_ddram_address_n1(column, row);
+ 1be:	64 2f       	mov	r22, r20
+ 1c0:	0e 94 ce 00 	call	0x19c	; 0x19c <get_ddram_address_n1>
+	oled_write_cmd(CMD_DDRAM | addr);
+ 1c4:	80 68       	ori	r24, 0x80	; 128
+ 1c6:	0e 94 a9 00 	call	0x152	; 0x152 <oled_write_cmd>
+
+	oled_write_data(character);
+ 1ca:	8c 2f       	mov	r24, r28
+ 1cc:	0e 94 c1 00 	call	0x182	; 0x182 <oled_write_data>
+}
+ 1d0:	cf 91       	pop	r28
+ 1d2:	08 95       	ret
+
+000001d4 <cgrf_init>:
+
+	// clear the status bits by setting them to 1.
+	nrf24_set_status(STATUS_RX_DR | STATUS_TX_DS | STATUS_MAX_RT);
+
+	m_mode = transmitter;
+	cgrf_power_up();
+ 1d4:	0e 94 cf 02 	call	0x59e	; 0x59e <nrf24_configure_ports>
+ 1d8:	08 95       	ret
+
+000001da <cgrf_get_payload>:
+ 1da:	ef 92       	push	r14
+ 1dc:	ff 92       	push	r15
+ 1de:	1f 93       	push	r17
+ 1e0:	cf 93       	push	r28
+ 1e2:	df 93       	push	r29
+ 1e4:	00 d0       	rcall	.+0      	; 0x1e6 <cgrf_get_payload+0xc>
+ 1e6:	cd b7       	in	r28, 0x3d	; 61
+ 1e8:	de b7       	in	r29, 0x3e	; 62
+ 1ea:	7c 01       	movw	r14, r24
+ 1ec:	16 2f       	mov	r17, r22
+ 1ee:	19 82       	std	Y+1, r1	; 0x01
+ 1f0:	ce 01       	movw	r24, r28
+ 1f2:	01 96       	adiw	r24, 0x01	; 1
+ 1f4:	0e 94 e6 03 	call	0x7cc	; 0x7cc <nrf24_get_payload_size>
+ 1f8:	69 81       	ldd	r22, Y+1	; 0x01
+ 1fa:	66 23       	and	r22, r22
+ 1fc:	51 f0       	breq	.+20     	; 0x212 <cgrf_get_payload+0x38>
+ 1fe:	16 17       	cp	r17, r22
+ 200:	20 f0       	brcs	.+8      	; 0x20a <cgrf_get_payload+0x30>
+ 202:	c7 01       	movw	r24, r14
+ 204:	0e 94 f9 03 	call	0x7f2	; 0x7f2 <nrf24_get_payload>
+ 208:	04 c0       	rjmp	.+8      	; 0x212 <cgrf_get_payload+0x38>
+ 20a:	61 2f       	mov	r22, r17
+ 20c:	c7 01       	movw	r24, r14
+ 20e:	0e 94 f9 03 	call	0x7f2	; 0x7f2 <nrf24_get_payload>
+ 212:	1a 82       	std	Y+2, r1	; 0x02
+ 214:	ce 01       	movw	r24, r28
+ 216:	02 96       	adiw	r24, 0x02	; 2
+ 218:	0e 94 25 04 	call	0x84a	; 0x84a <nrf24_get_status>
+ 21c:	8a 81       	ldd	r24, Y+2	; 0x02
+ 21e:	86 ff       	sbrs	r24, 6
+ 220:	03 c0       	rjmp	.+6      	; 0x228 <cgrf_get_payload+0x4e>
+ 222:	80 e4       	ldi	r24, 0x40	; 64
+ 224:	0e 94 52 03 	call	0x6a4	; 0x6a4 <nrf24_set_status>
+ 228:	8a 81       	ldd	r24, Y+2	; 0x02
+ 22a:	0f 90       	pop	r0
+ 22c:	0f 90       	pop	r0
+ 22e:	df 91       	pop	r29
+ 230:	cf 91       	pop	r28
+ 232:	1f 91       	pop	r17
+ 234:	ff 90       	pop	r15
+ 236:	ef 90       	pop	r14
+ 238:	08 95       	ret
+
+0000023a <set_auto_ack>:
+ 23a:	80 91 0d 01 	lds	r24, 0x010D	; 0x80010d <m_auto_ack>
+ 23e:	81 30       	cpi	r24, 0x01	; 1
+ 240:	11 f4       	brne	.+4      	; 0x246 <set_auto_ack+0xc>
+ 242:	8f e3       	ldi	r24, 0x3F	; 63
+ 244:	01 c0       	rjmp	.+2      	; 0x248 <set_auto_ack+0xe>
+ 246:	80 e0       	ldi	r24, 0x00	; 0
+ 248:	0e 94 34 03 	call	0x668	; 0x668 <nrf24_set_en_aa>
+ 24c:	08 95       	ret
+
+0000024e <set_dynamic_payload>:
+ 24e:	80 91 05 01 	lds	r24, 0x0105	; 0x800105 <m_payload_length>
+ 252:	81 30       	cpi	r24, 0x01	; 1
+ 254:	11 f4       	brne	.+4      	; 0x25a <set_dynamic_payload+0xc>
+ 256:	83 e0       	ldi	r24, 0x03	; 3
+ 258:	01 c0       	rjmp	.+2      	; 0x25c <set_dynamic_payload+0xe>
+ 25a:	80 e0       	ldi	r24, 0x00	; 0
+ 25c:	0e 94 75 03 	call	0x6ea	; 0x6ea <nrf24_set_dynpd>
+ 260:	08 95       	ret
+
+00000262 <set_features>:
+ 262:	80 91 05 01 	lds	r24, 0x0105	; 0x800105 <m_payload_length>
+ 266:	81 30       	cpi	r24, 0x01	; 1
+ 268:	89 f0       	breq	.+34     	; 0x28c <set_features+0x2a>
+ 26a:	90 91 0d 01 	lds	r25, 0x010D	; 0x80010d <m_auto_ack>
+ 26e:	91 30       	cpi	r25, 0x01	; 1
+ 270:	39 f4       	brne	.+14     	; 0x280 <set_features+0x1e>
+ 272:	81 30       	cpi	r24, 0x01	; 1
+ 274:	39 f4       	brne	.+14     	; 0x284 <set_features+0x22>
+ 276:	80 e0       	ldi	r24, 0x00	; 0
+ 278:	01 c0       	rjmp	.+2      	; 0x27c <set_features+0x1a>
+ 27a:	84 e0       	ldi	r24, 0x04	; 4
+ 27c:	83 60       	ori	r24, 0x03	; 3
+ 27e:	03 c0       	rjmp	.+6      	; 0x286 <set_features+0x24>
+ 280:	80 e0       	ldi	r24, 0x00	; 0
+ 282:	01 c0       	rjmp	.+2      	; 0x286 <set_features+0x24>
+ 284:	82 e0       	ldi	r24, 0x02	; 2
+ 286:	0e 94 7a 03 	call	0x6f4	; 0x6f4 <nrf24_set_feature>
+ 28a:	08 95       	ret
+ 28c:	80 91 0d 01 	lds	r24, 0x010D	; 0x80010d <m_auto_ack>
+ 290:	81 30       	cpi	r24, 0x01	; 1
+ 292:	99 f3       	breq	.-26     	; 0x27a <set_features+0x18>
+ 294:	84 e0       	ldi	r24, 0x04	; 4
+ 296:	f7 cf       	rjmp	.-18     	; 0x286 <set_features+0x24>
+
+00000298 <set_payload1_size>:
+ 298:	80 91 0c 01 	lds	r24, 0x010C	; 0x80010c <__data_end>
+ 29c:	0e 94 5c 03 	call	0x6b8	; 0x6b8 <nrf24_set_rx_pw_p1>
+ 2a0:	08 95       	ret
+
+000002a2 <set_config>:
+ 2a2:	cf 93       	push	r28
+ 2a4:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <m_crc_encoding>
+ 2a8:	81 30       	cpi	r24, 0x01	; 1
+ 2aa:	21 f0       	breq	.+8      	; 0x2b4 <set_config+0x12>
+ 2ac:	82 30       	cpi	r24, 0x02	; 2
+ 2ae:	21 f4       	brne	.+8      	; 0x2b8 <set_config+0x16>
+ 2b0:	8c e0       	ldi	r24, 0x0C	; 12
+ 2b2:	03 c0       	rjmp	.+6      	; 0x2ba <set_config+0x18>
+ 2b4:	88 e0       	ldi	r24, 0x08	; 8
+ 2b6:	01 c0       	rjmp	.+2      	; 0x2ba <set_config+0x18>
+ 2b8:	80 e0       	ldi	r24, 0x00	; 0
+ 2ba:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <m_power>
+ 2be:	91 11       	cpse	r25, r1
+ 2c0:	01 c0       	rjmp	.+2      	; 0x2c4 <set_config+0x22>
+ 2c2:	82 60       	ori	r24, 0x02	; 2
+ 2c4:	90 91 0e 01 	lds	r25, 0x010E	; 0x80010e <m_mode>
+ 2c8:	91 30       	cpi	r25, 0x01	; 1
+ 2ca:	09 f4       	brne	.+2      	; 0x2ce <set_config+0x2c>
+ 2cc:	81 60       	ori	r24, 0x01	; 1
+ 2ce:	0e 94 2f 03 	call	0x65e	; 0x65e <nrf24_set_config>
+ 2d2:	c8 2f       	mov	r28, r24
+ 2d4:	80 91 0e 01 	lds	r24, 0x010E	; 0x80010e <m_mode>
+ 2d8:	81 30       	cpi	r24, 0x01	; 1
+ 2da:	49 f4       	brne	.+18     	; 0x2ee <set_config+0x4c>
+ 2dc:	80 91 09 01 	lds	r24, 0x0109	; 0x800109 <m_power>
+ 2e0:	81 11       	cpse	r24, r1
+ 2e2:	03 c0       	rjmp	.+6      	; 0x2ea <set_config+0x48>
+ 2e4:	0e 94 d9 02 	call	0x5b2	; 0x5b2 <nrf24_set_ce_high>
+ 2e8:	02 c0       	rjmp	.+4      	; 0x2ee <set_config+0x4c>
+ 2ea:	0e 94 d7 02 	call	0x5ae	; 0x5ae <nrf24_set_ce_low>
+ 2ee:	8c 2f       	mov	r24, r28
+ 2f0:	cf 91       	pop	r28
+ 2f2:	08 95       	ret
+
+000002f4 <cgrf_power_up>:
+ 2f4:	80 91 09 01 	lds	r24, 0x0109	; 0x800109 <m_power>
+ 2f8:	88 23       	and	r24, r24
+ 2fa:	29 f0       	breq	.+10     	; 0x306 <cgrf_power_up+0x12>
+ 2fc:	10 92 09 01 	sts	0x0109, r1	; 0x800109 <m_power>
+ 300:	0e 94 51 01 	call	0x2a2	; 0x2a2 <set_config>
+ 304:	08 95       	ret
+ 306:	80 e0       	ldi	r24, 0x00	; 0
+ 308:	08 95       	ret
+
+0000030a <cgrf_power_down>:
+ 30a:	80 91 09 01 	lds	r24, 0x0109	; 0x800109 <m_power>
+ 30e:	81 11       	cpse	r24, r1
+ 310:	06 c0       	rjmp	.+12     	; 0x31e <cgrf_power_down+0x14>
+ 312:	81 e0       	ldi	r24, 0x01	; 1
+ 314:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <m_power>
+ 318:	0e 94 51 01 	call	0x2a2	; 0x2a2 <set_config>
+ 31c:	08 95       	ret
+ 31e:	80 e0       	ldi	r24, 0x00	; 0
+ 320:	08 95       	ret
+
+00000322 <set_channel>:
+ 322:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <m_channel>
+ 326:	0e 94 48 03 	call	0x690	; 0x690 <nrf24_set_rf_ch>
+ 32a:	08 95       	ret
+
+0000032c <set_rf_setup>:
+ 32c:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <m_data_rate>
+ 330:	81 30       	cpi	r24, 0x01	; 1
+ 332:	11 f4       	brne	.+4      	; 0x338 <set_rf_setup+0xc>
+ 334:	88 e0       	ldi	r24, 0x08	; 8
+ 336:	01 c0       	rjmp	.+2      	; 0x33a <set_rf_setup+0xe>
+ 338:	80 e0       	ldi	r24, 0x00	; 0
+ 33a:	90 91 06 01 	lds	r25, 0x0106	; 0x800106 <m_output_power>
+ 33e:	99 23       	and	r25, r25
+ 340:	59 f0       	breq	.+22     	; 0x358 <set_rf_setup+0x2c>
+ 342:	91 30       	cpi	r25, 0x01	; 1
+ 344:	11 f4       	brne	.+4      	; 0x34a <set_rf_setup+0x1e>
+ 346:	82 60       	ori	r24, 0x02	; 2
+ 348:	07 c0       	rjmp	.+14     	; 0x358 <set_rf_setup+0x2c>
+ 34a:	92 30       	cpi	r25, 0x02	; 2
+ 34c:	11 f4       	brne	.+4      	; 0x352 <set_rf_setup+0x26>
+ 34e:	84 60       	ori	r24, 0x04	; 4
+ 350:	03 c0       	rjmp	.+6      	; 0x358 <set_rf_setup+0x2c>
+ 352:	93 30       	cpi	r25, 0x03	; 3
+ 354:	09 f4       	brne	.+2      	; 0x358 <set_rf_setup+0x2c>
+ 356:	86 60       	ori	r24, 0x06	; 6
+ 358:	0e 94 4d 03 	call	0x69a	; 0x69a <nrf24_set_rf_setup>
+ 35c:	08 95       	ret
+
+0000035e <set_pipe1_address>:
+ 35e:	80 e0       	ldi	r24, 0x00	; 0
+ 360:	91 e0       	ldi	r25, 0x01	; 1
+ 362:	0e 94 af 03 	call	0x75e	; 0x75e <nrf24_set_rx_address_pipe1>
+ 366:	08 95       	ret
+
+00000368 <cgrf_start_as_reciever>:
+}
+
+// setup as a receiver and power up.
+void cgrf_start_as_reciever()
+{
+ 368:	cf 93       	push	r28
+	// reserved automatic acknowledgment pipe only allows 0x00.
+	nrf24_set_rx_pw_p0(0x00);
+ 36a:	80 e0       	ldi	r24, 0x00	; 0
+ 36c:	0e 94 57 03 	call	0x6ae	; 0x6ae <nrf24_set_rx_pw_p0>
+
+	// set number of bytes to zero for unused data pipes.
+	nrf24_set_rx_pw_p2(0x00);
+ 370:	80 e0       	ldi	r24, 0x00	; 0
+ 372:	0e 94 61 03 	call	0x6c2	; 0x6c2 <nrf24_set_rx_pw_p2>
+	nrf24_set_rx_pw_p3(0x00);
+ 376:	80 e0       	ldi	r24, 0x00	; 0
+ 378:	0e 94 66 03 	call	0x6cc	; 0x6cc <nrf24_set_rx_pw_p3>
+	nrf24_set_rx_pw_p4(0x00);
+ 37c:	80 e0       	ldi	r24, 0x00	; 0
+ 37e:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <nrf24_set_rx_pw_p4>
+	nrf24_set_rx_pw_p5(0x00);
+ 382:	80 e0       	ldi	r24, 0x00	; 0
+ 384:	0e 94 70 03 	call	0x6e0	; 0x6e0 <nrf24_set_rx_pw_p5>
+	
+	// enable auto acknowledgment (enhanced ShockBurst).
+	set_auto_ack();
+ 388:	0e 94 1d 01 	call	0x23a	; 0x23a <set_auto_ack>
+
+	// enable RX addresses for data pipes 0 and 1
+	nrf24_set_en_rxaddr(ERX_P0 | ERX_P1);
+ 38c:	83 e0       	ldi	r24, 0x03	; 3
+ 38e:	0e 94 39 03 	call	0x672	; 0x672 <nrf24_set_en_rxaddr>
+
+	// auto retransmit delay wait 1000 us
+	// auto retransmit count, up to 15 (0x0F) retransmits on fail.
+	nrf24_set_setup_retr(ARD_WAIT_500US | 0x0F);
+ 392:	8f e1       	ldi	r24, 0x1F	; 31
+ 394:	0e 94 43 03 	call	0x686	; 0x686 <nrf24_set_setup_retr>
+	
+	// set address width to 5 bytes.
+	nrf24_set_setup_aw(AW_5BYTES);
+ 398:	83 e0       	ldi	r24, 0x03	; 3
+ 39a:	0e 94 3e 03 	call	0x67c	; 0x67c <nrf24_set_setup_aw>
+
+	set_dynamic_payload();
+ 39e:	0e 94 27 01 	call	0x24e	; 0x24e <set_dynamic_payload>
+	set_features();
+ 3a2:	0e 94 31 01 	call	0x262	; 0x262 <set_features>
+
+	// number of bytes in RX payload for data pipe.
+	set_payload1_size();
+ 3a6:	0e 94 4c 01 	call	0x298	; 0x298 <set_payload1_size>
+	
+	set_channel();
+ 3aa:	0e 94 91 01 	call	0x322	; 0x322 <set_channel>
+	set_rf_setup();
+ 3ae:	0e 94 96 01 	call	0x32c	; 0x32c <set_rf_setup>
+
+	// set the addresses.
+	m_pipe1_address[0] = 0x01;
+ 3b2:	e0 e0       	ldi	r30, 0x00	; 0
+ 3b4:	f1 e0       	ldi	r31, 0x01	; 1
+ 3b6:	c1 e0       	ldi	r28, 0x01	; 1
+ 3b8:	c0 83       	st	Z, r28
+	m_pipe1_address[1] = 0x02;
+ 3ba:	82 e0       	ldi	r24, 0x02	; 2
+ 3bc:	81 83       	std	Z+1, r24	; 0x01
+	m_pipe1_address[2] = 0x03;
+ 3be:	83 e0       	ldi	r24, 0x03	; 3
+ 3c0:	82 83       	std	Z+2, r24	; 0x02
+	m_pipe1_address[3] = 0x04;
+ 3c2:	84 e0       	ldi	r24, 0x04	; 4
+ 3c4:	83 83       	std	Z+3, r24	; 0x03
+	m_pipe1_address[4] = 0x01;
+ 3c6:	c4 83       	std	Z+4, r28	; 0x04
+
+	set_pipe1_address();
+ 3c8:	0e 94 af 01 	call	0x35e	; 0x35e <set_pipe1_address>
+
+	// flush the buffers.
+	nrf24_flush_rx();
+ 3cc:	0e 94 03 03 	call	0x606	; 0x606 <nrf24_flush_rx>
+	nrf24_flush_tx();
+ 3d0:	0e 94 fd 02 	call	0x5fa	; 0x5fa <nrf24_flush_tx>
+
+	// clear the status bits by setting them to 1.
+	nrf24_set_status(STATUS_RX_DR | STATUS_TX_DS | STATUS_MAX_RT);
+ 3d4:	80 e7       	ldi	r24, 0x70	; 112
+ 3d6:	0e 94 52 03 	call	0x6a4	; 0x6a4 <nrf24_set_status>
+
+	m_mode = reciever;
+ 3da:	c0 93 0e 01 	sts	0x010E, r28	; 0x80010e <m_mode>
+	cgrf_power_up();
+ 3de:	0e 94 7a 01 	call	0x2f4	; 0x2f4 <cgrf_power_up>
+}
+ 3e2:	cf 91       	pop	r28
+ 3e4:	08 95       	ret
+
+000003e6 <config_character_display>:
+	uint8_t ch1 = hex[(n >> 4)];
+	uint8_t ch2 = hex[(n & 0x0F)];
+	
+	oled_write_character(ch1, x, y);
+	oled_write_character(ch2, x+1, y);
+}
+ 3e6:	0e 94 5c 00 	call	0xb8	; 0xb8 <oled_config>
+ 3ea:	88 e3       	ldi	r24, 0x38	; 56
+ 3ec:	0e 94 a9 00 	call	0x152	; 0x152 <oled_write_cmd>
+ 3f0:	0e 94 b1 00 	call	0x162	; 0x162 <oled_cursor_home>
+ 3f4:	0e 94 b5 00 	call	0x16a	; 0x16a <oled_incremental_cursor>
+ 3f8:	0e 94 ad 00 	call	0x15a	; 0x15a <oled_clear>
+ 3fc:	08 95       	ret
+
+000003fe <display_number>:
+ 3fe:	0f 93       	push	r16
+ 400:	1f 93       	push	r17
+ 402:	cf 93       	push	r28
+ 404:	df 93       	push	r29
+ 406:	d8 2f       	mov	r29, r24
+ 408:	16 2f       	mov	r17, r22
+ 40a:	04 2f       	mov	r16, r20
+ 40c:	c9 e2       	ldi	r28, 0x29	; 41
+ 40e:	8c 9f       	mul	r24, r28
+ 410:	c1 2d       	mov	r28, r1
+ 412:	11 24       	eor	r1, r1
+ 414:	c2 95       	swap	r28
+ 416:	cf 70       	andi	r28, 0x0F	; 15
+ 418:	80 e3       	ldi	r24, 0x30	; 48
+ 41a:	8c 0f       	add	r24, r28
+ 41c:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <oled_write_character>
+ 420:	84 e6       	ldi	r24, 0x64	; 100
+ 422:	c8 9f       	mul	r28, r24
+ 424:	d0 19       	sub	r29, r0
+ 426:	11 24       	eor	r1, r1
+ 428:	cd ec       	ldi	r28, 0xCD	; 205
+ 42a:	dc 9f       	mul	r29, r28
+ 42c:	c1 2d       	mov	r28, r1
+ 42e:	11 24       	eor	r1, r1
+ 430:	c6 95       	lsr	r28
+ 432:	c6 95       	lsr	r28
+ 434:	c6 95       	lsr	r28
+ 436:	61 e0       	ldi	r22, 0x01	; 1
+ 438:	61 0f       	add	r22, r17
+ 43a:	40 2f       	mov	r20, r16
+ 43c:	80 e3       	ldi	r24, 0x30	; 48
+ 43e:	8c 0f       	add	r24, r28
+ 440:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <oled_write_character>
+ 444:	62 e0       	ldi	r22, 0x02	; 2
+ 446:	61 0f       	add	r22, r17
+ 448:	cc 0f       	add	r28, r28
+ 44a:	8c 2f       	mov	r24, r28
+ 44c:	88 0f       	add	r24, r24
+ 44e:	88 0f       	add	r24, r24
+ 450:	c8 0f       	add	r28, r24
+ 452:	80 e3       	ldi	r24, 0x30	; 48
+ 454:	8d 0f       	add	r24, r29
+ 456:	40 2f       	mov	r20, r16
+ 458:	8c 1b       	sub	r24, r28
+ 45a:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <oled_write_character>
+ 45e:	df 91       	pop	r29
+ 460:	cf 91       	pop	r28
+ 462:	1f 91       	pop	r17
+ 464:	0f 91       	pop	r16
+ 466:	08 95       	ret
+
+00000468 <display_binary>:
+
+void display_binary(uint8_t const n, uint8_t const x, uint8_t const y)
+{
+ 468:	ef 92       	push	r14
+ 46a:	ff 92       	push	r15
+ 46c:	0f 93       	push	r16
+ 46e:	1f 93       	push	r17
+ 470:	cf 93       	push	r28
+ 472:	df 93       	push	r29
+ 474:	04 2f       	mov	r16, r20
+	uint8_t xpos = x;
+ 476:	16 2f       	mov	r17, r22
+ 478:	c7 e0       	ldi	r28, 0x07	; 7
+ 47a:	d0 e0       	ldi	r29, 0x00	; 0
+	
+	for (uint8_t i = 0; i !=8; i++)
+	{
+		if (n & (1 << (7 - i)))
+ 47c:	e8 2e       	mov	r14, r24
+ 47e:	f1 2c       	mov	r15, r1
+ 480:	97 01       	movw	r18, r14
+ 482:	0c 2e       	mov	r0, r28
+ 484:	02 c0       	rjmp	.+4      	; 0x48a <display_binary+0x22>
+ 486:	35 95       	asr	r19
+ 488:	27 95       	ror	r18
+ 48a:	0a 94       	dec	r0
+ 48c:	e2 f7       	brpl	.-8      	; 0x486 <display_binary+0x1e>
+ 48e:	20 ff       	sbrs	r18, 0
+ 490:	06 c0       	rjmp	.+12     	; 0x49e <display_binary+0x36>
+		{
+			oled_write_character('1', xpos, y);
+ 492:	40 2f       	mov	r20, r16
+ 494:	61 2f       	mov	r22, r17
+ 496:	81 e3       	ldi	r24, 0x31	; 49
+ 498:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <oled_write_character>
+ 49c:	05 c0       	rjmp	.+10     	; 0x4a8 <display_binary+0x40>
+		}
+		else
+		{
+			oled_write_character('0', xpos, y);
+ 49e:	40 2f       	mov	r20, r16
+ 4a0:	61 2f       	mov	r22, r17
+ 4a2:	80 e3       	ldi	r24, 0x30	; 48
+ 4a4:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <oled_write_character>
+		}
+		
+		xpos++;
+ 4a8:	1f 5f       	subi	r17, 0xFF	; 255
+ 4aa:	21 97       	sbiw	r28, 0x01	; 1
+ 4ac:	48 f7       	brcc	.-46     	; 0x480 <display_binary+0x18>
+	}
+}
+ 4ae:	df 91       	pop	r29
+ 4b0:	cf 91       	pop	r28
+ 4b2:	1f 91       	pop	r17
+ 4b4:	0f 91       	pop	r16
+ 4b6:	ff 90       	pop	r15
+ 4b8:	ef 90       	pop	r14
+ 4ba:	08 95       	ret
+
+000004bc <config_led>:
+#define LED0 PC4
+
+void config_led(void)
+{
+	// setup led for output.
+	DDRC |= (1 << LED0);
+ 4bc:	3c 9a       	sbi	0x07, 4	; 7
+ 4be:	08 95       	ret
+
+000004c0 <led_on>:
+}
+
+// switch led on.
+void led_on(void)
+{
+	PORTC |= (1 << LED0);
+ 4c0:	44 9a       	sbi	0x08, 4	; 8
+ 4c2:	08 95       	ret
+
+000004c4 <led_off>:
+}
+
+// switch led off.
+void led_off(void)
+{
+	PORTC &= ~(1 << LED0);
+ 4c4:	44 98       	cbi	0x08, 4	; 8
+ 4c6:	08 95       	ret
+
+000004c8 <config_receive>:
+	}	
+}
+
+void config_receive()
+{
+	config_buttons();
+ 4c8:	0e 94 53 00 	call	0xa6	; 0xa6 <config_buttons>
+	config_led();
+ 4cc:	0e 94 5e 02 	call	0x4bc	; 0x4bc <config_led>
+	config_character_display();
+ 4d0:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <config_character_display>
+	oled_power_on();
+ 4d4:	0e 94 b9 00 	call	0x172	; 0x172 <oled_power_on>
+
+	cgrf_init();
+ 4d8:	0e 94 ea 00 	call	0x1d4	; 0x1d4 <cgrf_init>
+	cgrf_start_as_reciever();
+ 4dc:	0e 94 b4 01 	call	0x368	; 0x368 <cgrf_start_as_reciever>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 4e0:	81 ee       	ldi	r24, 0xE1	; 225
+ 4e2:	94 e0       	ldi	r25, 0x04	; 4
+ 4e4:	01 97       	sbiw	r24, 0x01	; 1
+ 4e6:	f1 f7       	brne	.-4      	; 0x4e4 <config_receive+0x1c>
+ 4e8:	00 c0       	rjmp	.+0      	; 0x4ea <config_receive+0x22>
+ 4ea:	00 00       	nop
+ 4ec:	08 95       	ret
+
+000004ee <run_receive>:
+	_delay_ms(5);
+}
+
+void run_receive()
+{
+ 4ee:	cf 93       	push	r28
+ 4f0:	df 93       	push	r29
+ 4f2:	cd b7       	in	r28, 0x3d	; 61
+ 4f4:	de b7       	in	r29, 0x3e	; 62
+ 4f6:	a0 97       	sbiw	r28, 0x20	; 32
+ 4f8:	0f b6       	in	r0, 0x3f	; 63
+ 4fa:	f8 94       	cli
+ 4fc:	de bf       	out	0x3e, r29	; 62
+ 4fe:	0f be       	out	0x3f, r0	; 63
+ 500:	cd bf       	out	0x3d, r28	; 61
+	uint8_t buffer[32] = {0, 0, 0};
+ 502:	fe 01       	movw	r30, r28
+ 504:	31 96       	adiw	r30, 0x01	; 1
+ 506:	80 e2       	ldi	r24, 0x20	; 32
+ 508:	df 01       	movw	r26, r30
+ 50a:	1d 92       	st	X+, r1
+ 50c:	8a 95       	dec	r24
+ 50e:	e9 f7       	brne	.-6      	; 0x50a <run_receive+0x1c>
+	uint8_t received = 0;
+	uint8_t failed = 0;
+	uint8_t status = 0;
+
+	if (running != 0)
+		led_on();
+ 510:	0e 94 60 02 	call	0x4c0	; 0x4c0 <led_on>
+
+	//display_registers();
+	oled_clear();
+ 514:	0e 94 ad 00 	call	0x15a	; 0x15a <oled_clear>
+
+void run_receive()
+{
+	uint8_t buffer[32] = {0, 0, 0};
+
+	uint8_t running = 1;
+ 518:	11 e0       	ldi	r17, 0x01	; 1
+				led_on();
+				oled_power_on();
+			}
+			else
+			{
+				running = 0;
+ 51a:	f1 2c       	mov	r15, r1
+	{
+		if (button1_down())
+		{
+			if (running == 0)
+			{
+				running = 1;
+ 51c:	01 e0       	ldi	r16, 0x01	; 1
+	//display_registers();
+	oled_clear();
+
+	while (1)
+	{
+		if (button1_down())
+ 51e:	0e 94 55 00 	call	0xaa	; 0xaa <button1_down>
+ 522:	88 23       	and	r24, r24
+ 524:	b9 f0       	breq	.+46     	; 0x554 <run_receive+0x66>
+		{
+			if (running == 0)
+ 526:	11 11       	cpse	r17, r1
+ 528:	08 c0       	rjmp	.+16     	; 0x53a <run_receive+0x4c>
+			{
+				running = 1;
+				cgrf_power_up();
+ 52a:	0e 94 7a 01 	call	0x2f4	; 0x2f4 <cgrf_power_up>
+				led_on();
+ 52e:	0e 94 60 02 	call	0x4c0	; 0x4c0 <led_on>
+				oled_power_on();
+ 532:	0e 94 b9 00 	call	0x172	; 0x172 <oled_power_on>
+	{
+		if (button1_down())
+		{
+			if (running == 0)
+			{
+				running = 1;
+ 536:	10 2f       	mov	r17, r16
+ 538:	07 c0       	rjmp	.+14     	; 0x548 <run_receive+0x5a>
+				oled_power_on();
+			}
+			else
+			{
+				running = 0;
+				cgrf_power_down();
+ 53a:	0e 94 85 01 	call	0x30a	; 0x30a <cgrf_power_down>
+				led_off();
+ 53e:	0e 94 62 02 	call	0x4c4	; 0x4c4 <led_off>
+				oled_power_off();
+ 542:	0e 94 bd 00 	call	0x17a	; 0x17a <oled_power_off>
+				led_on();
+				oled_power_on();
+			}
+			else
+			{
+				running = 0;
+ 546:	1f 2d       	mov	r17, r15
+ 548:	87 ea       	ldi	r24, 0xA7	; 167
+ 54a:	91 e6       	ldi	r25, 0x61	; 97
+ 54c:	01 97       	sbiw	r24, 0x01	; 1
+ 54e:	f1 f7       	brne	.-4      	; 0x54c <run_receive+0x5e>
+ 550:	00 c0       	rjmp	.+0      	; 0x552 <run_receive+0x64>
+ 552:	00 00       	nop
+			}
+			
+			_delay_ms(100);
+		}
+		
+		if (running == 1)
+ 554:	11 30       	cpi	r17, 0x01	; 1
+ 556:	19 f7       	brne	.-58     	; 0x51e <run_receive+0x30>
+		{
+			status = cgrf_get_payload(&buffer[0], 3);
+ 558:	63 e0       	ldi	r22, 0x03	; 3
+ 55a:	ce 01       	movw	r24, r28
+ 55c:	01 96       	adiw	r24, 0x01	; 1
+ 55e:	0e 94 ed 00 	call	0x1da	; 0x1da <cgrf_get_payload>
+			
+			display_binary(status, 1, 1);
+ 562:	40 2f       	mov	r20, r16
+ 564:	60 2f       	mov	r22, r16
+ 566:	0e 94 34 02 	call	0x468	; 0x468 <display_binary>
+			display_number(buffer[0], 1, 2);
+ 56a:	42 e0       	ldi	r20, 0x02	; 2
+ 56c:	60 2f       	mov	r22, r16
+ 56e:	89 81       	ldd	r24, Y+1	; 0x01
+ 570:	0e 94 ff 01 	call	0x3fe	; 0x3fe <display_number>
+			display_number(buffer[1], 5, 2);
+ 574:	42 e0       	ldi	r20, 0x02	; 2
+ 576:	65 e0       	ldi	r22, 0x05	; 5
+ 578:	8a 81       	ldd	r24, Y+2	; 0x02
+ 57a:	0e 94 ff 01 	call	0x3fe	; 0x3fe <display_number>
+			display_number(buffer[2], 8, 2);
+ 57e:	42 e0       	ldi	r20, 0x02	; 2
+ 580:	68 e0       	ldi	r22, 0x08	; 8
+ 582:	8b 81       	ldd	r24, Y+3	; 0x03
+ 584:	0e 94 ff 01 	call	0x3fe	; 0x3fe <display_number>
+ 588:	a3 ed       	ldi	r26, 0xD3	; 211
+ 58a:	b0 e3       	ldi	r27, 0x30	; 48
+ 58c:	11 97       	sbiw	r26, 0x01	; 1
+ 58e:	f1 f7       	brne	.-4      	; 0x58c <run_receive+0x9e>
+ 590:	00 c0       	rjmp	.+0      	; 0x592 <run_receive+0xa4>
+ 592:	00 00       	nop
+ 594:	c4 cf       	rjmp	.-120    	; 0x51e <run_receive+0x30>
+
+00000596 <main>:
+int main(void)
+{
+	//config_transmit();
+	//run_transmit();
+		
+	config_receive();
+ 596:	0e 94 64 02 	call	0x4c8	; 0x4c8 <config_receive>
+	run_receive();
+ 59a:	0e 94 77 02 	call	0x4ee	; 0x4ee <run_receive>
+
+0000059e <nrf24_configure_ports>:
+
+// get radio frequency setup register value and return by pointer;
+uint8_t nrf24_get_rf_setup(uint8_t * value)
+{
+	return read_register_bytes(RMAP_RF_SETUP, value, 1);
+}
+ 59e:	38 9a       	sbi	0x07, 0	; 7
+ 5a0:	39 9a       	sbi	0x07, 1	; 7
+ 5a2:	25 9a       	sbi	0x04, 5	; 4
+ 5a4:	23 9a       	sbi	0x04, 3	; 4
+ 5a6:	24 98       	cbi	0x04, 4	; 4
+ 5a8:	40 98       	cbi	0x08, 0	; 8
+ 5aa:	41 9a       	sbi	0x08, 1	; 8
+ 5ac:	08 95       	ret
+
+000005ae <nrf24_set_ce_low>:
+ 5ae:	40 98       	cbi	0x08, 0	; 8
+ 5b0:	08 95       	ret
+
+000005b2 <nrf24_set_ce_high>:
+ 5b2:	40 9a       	sbi	0x08, 0	; 8
+ 5b4:	08 95       	ret
+
+000005b6 <spi_out_command>:
+ 5b6:	68 2f       	mov	r22, r24
+ 5b8:	2d 98       	cbi	0x05, 5	; 5
+ 5ba:	97 e0       	ldi	r25, 0x07	; 7
+ 5bc:	80 e0       	ldi	r24, 0x00	; 0
+ 5be:	70 e0       	ldi	r23, 0x00	; 0
+ 5c0:	e1 e0       	ldi	r30, 0x01	; 1
+ 5c2:	f0 e0       	ldi	r31, 0x00	; 0
+ 5c4:	49 2f       	mov	r20, r25
+ 5c6:	9b 01       	movw	r18, r22
+ 5c8:	09 2e       	mov	r0, r25
+ 5ca:	02 c0       	rjmp	.+4      	; 0x5d0 <spi_out_command+0x1a>
+ 5cc:	35 95       	asr	r19
+ 5ce:	27 95       	ror	r18
+ 5d0:	0a 94       	dec	r0
+ 5d2:	e2 f7       	brpl	.-8      	; 0x5cc <spi_out_command+0x16>
+ 5d4:	20 ff       	sbrs	r18, 0
+ 5d6:	02 c0       	rjmp	.+4      	; 0x5dc <spi_out_command+0x26>
+ 5d8:	2b 9a       	sbi	0x05, 3	; 5
+ 5da:	01 c0       	rjmp	.+2      	; 0x5de <spi_out_command+0x28>
+ 5dc:	2b 98       	cbi	0x05, 3	; 5
+ 5de:	2d 9a       	sbi	0x05, 5	; 5
+ 5e0:	1c 9b       	sbis	0x03, 4	; 3
+ 5e2:	07 c0       	rjmp	.+14     	; 0x5f2 <spi_out_command+0x3c>
+ 5e4:	9f 01       	movw	r18, r30
+ 5e6:	02 c0       	rjmp	.+4      	; 0x5ec <spi_out_command+0x36>
+ 5e8:	22 0f       	add	r18, r18
+ 5ea:	33 1f       	adc	r19, r19
+ 5ec:	4a 95       	dec	r20
+ 5ee:	e2 f7       	brpl	.-8      	; 0x5e8 <spi_out_command+0x32>
+ 5f0:	82 2b       	or	r24, r18
+ 5f2:	2d 98       	cbi	0x05, 5	; 5
+ 5f4:	91 50       	subi	r25, 0x01	; 1
+ 5f6:	30 f7       	brcc	.-52     	; 0x5c4 <spi_out_command+0xe>
+ 5f8:	08 95       	ret
+
+000005fa <nrf24_flush_tx>:
+ 5fa:	41 98       	cbi	0x08, 1	; 8
+ 5fc:	81 ee       	ldi	r24, 0xE1	; 225
+ 5fe:	0e 94 db 02 	call	0x5b6	; 0x5b6 <spi_out_command>
+ 602:	41 9a       	sbi	0x08, 1	; 8
+ 604:	08 95       	ret
+
+00000606 <nrf24_flush_rx>:
+ 606:	41 98       	cbi	0x08, 1	; 8
+ 608:	82 ee       	ldi	r24, 0xE2	; 226
+ 60a:	0e 94 db 02 	call	0x5b6	; 0x5b6 <spi_out_command>
+ 60e:	41 9a       	sbi	0x08, 1	; 8
+ 610:	08 95       	ret
+
+00000612 <spi_out_data_value>:
+ 612:	2d 98       	cbi	0x05, 5	; 5
+ 614:	97 e0       	ldi	r25, 0x07	; 7
+ 616:	48 2f       	mov	r20, r24
+ 618:	50 e0       	ldi	r21, 0x00	; 0
+ 61a:	9a 01       	movw	r18, r20
+ 61c:	09 2e       	mov	r0, r25
+ 61e:	02 c0       	rjmp	.+4      	; 0x624 <spi_out_data_value+0x12>
+ 620:	35 95       	asr	r19
+ 622:	27 95       	ror	r18
+ 624:	0a 94       	dec	r0
+ 626:	e2 f7       	brpl	.-8      	; 0x620 <spi_out_data_value+0xe>
+ 628:	20 ff       	sbrs	r18, 0
+ 62a:	02 c0       	rjmp	.+4      	; 0x630 <spi_out_data_value+0x1e>
+ 62c:	2b 9a       	sbi	0x05, 3	; 5
+ 62e:	01 c0       	rjmp	.+2      	; 0x632 <spi_out_data_value+0x20>
+ 630:	2b 98       	cbi	0x05, 3	; 5
+ 632:	2d 9a       	sbi	0x05, 5	; 5
+ 634:	2d 98       	cbi	0x05, 5	; 5
+ 636:	91 50       	subi	r25, 0x01	; 1
+ 638:	80 f7       	brcc	.-32     	; 0x61a <spi_out_data_value+0x8>
+ 63a:	08 95       	ret
+
+0000063c <write_register_value>:
+ 63c:	cf 93       	push	r28
+ 63e:	df 93       	push	r29
+ 640:	d6 2f       	mov	r29, r22
+ 642:	41 98       	cbi	0x08, 1	; 8
+ 644:	8f 71       	andi	r24, 0x1F	; 31
+ 646:	80 62       	ori	r24, 0x20	; 32
+ 648:	0e 94 db 02 	call	0x5b6	; 0x5b6 <spi_out_command>
+ 64c:	c8 2f       	mov	r28, r24
+ 64e:	8d 2f       	mov	r24, r29
+ 650:	0e 94 09 03 	call	0x612	; 0x612 <spi_out_data_value>
+ 654:	41 9a       	sbi	0x08, 1	; 8
+ 656:	8c 2f       	mov	r24, r28
+ 658:	df 91       	pop	r29
+ 65a:	cf 91       	pop	r28
+ 65c:	08 95       	ret
+
+0000065e <nrf24_set_config>:
+ 65e:	68 2f       	mov	r22, r24
+ 660:	80 e0       	ldi	r24, 0x00	; 0
+ 662:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 666:	08 95       	ret
+
+00000668 <nrf24_set_en_aa>:
+ 668:	68 2f       	mov	r22, r24
+ 66a:	81 e0       	ldi	r24, 0x01	; 1
+ 66c:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 670:	08 95       	ret
+
+00000672 <nrf24_set_en_rxaddr>:
+ 672:	68 2f       	mov	r22, r24
+ 674:	82 e0       	ldi	r24, 0x02	; 2
+ 676:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 67a:	08 95       	ret
+
+0000067c <nrf24_set_setup_aw>:
+ 67c:	68 2f       	mov	r22, r24
+ 67e:	83 e0       	ldi	r24, 0x03	; 3
+ 680:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 684:	08 95       	ret
+
+00000686 <nrf24_set_setup_retr>:
+ 686:	68 2f       	mov	r22, r24
+ 688:	84 e0       	ldi	r24, 0x04	; 4
+ 68a:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 68e:	08 95       	ret
+
+00000690 <nrf24_set_rf_ch>:
+ 690:	68 2f       	mov	r22, r24
+ 692:	85 e0       	ldi	r24, 0x05	; 5
+ 694:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 698:	08 95       	ret
+
+0000069a <nrf24_set_rf_setup>:
+ 69a:	68 2f       	mov	r22, r24
+ 69c:	86 e0       	ldi	r24, 0x06	; 6
+ 69e:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 6a2:	08 95       	ret
+
+000006a4 <nrf24_set_status>:
+ 6a4:	68 2f       	mov	r22, r24
+ 6a6:	87 e0       	ldi	r24, 0x07	; 7
+ 6a8:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 6ac:	08 95       	ret
+
+000006ae <nrf24_set_rx_pw_p0>:
+ 6ae:	68 2f       	mov	r22, r24
+ 6b0:	81 e1       	ldi	r24, 0x11	; 17
+ 6b2:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 6b6:	08 95       	ret
+
+000006b8 <nrf24_set_rx_pw_p1>:
+ 6b8:	68 2f       	mov	r22, r24
+ 6ba:	82 e1       	ldi	r24, 0x12	; 18
+ 6bc:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 6c0:	08 95       	ret
+
+000006c2 <nrf24_set_rx_pw_p2>:
+ 6c2:	68 2f       	mov	r22, r24
+ 6c4:	83 e1       	ldi	r24, 0x13	; 19
+ 6c6:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 6ca:	08 95       	ret
+
+000006cc <nrf24_set_rx_pw_p3>:
+ 6cc:	68 2f       	mov	r22, r24
+ 6ce:	84 e1       	ldi	r24, 0x14	; 20
+ 6d0:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 6d4:	08 95       	ret
+
+000006d6 <nrf24_set_rx_pw_p4>:
+ 6d6:	68 2f       	mov	r22, r24
+ 6d8:	85 e1       	ldi	r24, 0x15	; 21
+ 6da:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 6de:	08 95       	ret
+
+000006e0 <nrf24_set_rx_pw_p5>:
+ 6e0:	68 2f       	mov	r22, r24
+ 6e2:	86 e1       	ldi	r24, 0x16	; 22
+ 6e4:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 6e8:	08 95       	ret
+
+000006ea <nrf24_set_dynpd>:
+ 6ea:	68 2f       	mov	r22, r24
+ 6ec:	8c e1       	ldi	r24, 0x1C	; 28
+ 6ee:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 6f2:	08 95       	ret
+
+000006f4 <nrf24_set_feature>:
+ 6f4:	68 2f       	mov	r22, r24
+ 6f6:	8d e1       	ldi	r24, 0x1D	; 29
+ 6f8:	0e 94 1e 03 	call	0x63c	; 0x63c <write_register_value>
+ 6fc:	08 95       	ret
+
+000006fe <spi_out_data_bytes>:
+ 6fe:	0f 93       	push	r16
+ 700:	1f 93       	push	r17
+ 702:	cf 93       	push	r28
+ 704:	df 93       	push	r29
+ 706:	66 23       	and	r22, r22
+ 708:	71 f0       	breq	.+28     	; 0x726 <spi_out_data_bytes+0x28>
+ 70a:	ec 01       	movw	r28, r24
+ 70c:	61 50       	subi	r22, 0x01	; 1
+ 70e:	06 2f       	mov	r16, r22
+ 710:	10 e0       	ldi	r17, 0x00	; 0
+ 712:	0f 5f       	subi	r16, 0xFF	; 255
+ 714:	1f 4f       	sbci	r17, 0xFF	; 255
+ 716:	08 0f       	add	r16, r24
+ 718:	19 1f       	adc	r17, r25
+ 71a:	89 91       	ld	r24, Y+
+ 71c:	0e 94 09 03 	call	0x612	; 0x612 <spi_out_data_value>
+ 720:	c0 17       	cp	r28, r16
+ 722:	d1 07       	cpc	r29, r17
+ 724:	d1 f7       	brne	.-12     	; 0x71a <spi_out_data_bytes+0x1c>
+ 726:	df 91       	pop	r29
+ 728:	cf 91       	pop	r28
+ 72a:	1f 91       	pop	r17
+ 72c:	0f 91       	pop	r16
+ 72e:	08 95       	ret
+
+00000730 <write_register_bytes>:
+ 730:	0f 93       	push	r16
+ 732:	1f 93       	push	r17
+ 734:	cf 93       	push	r28
+ 736:	df 93       	push	r29
+ 738:	8b 01       	movw	r16, r22
+ 73a:	d4 2f       	mov	r29, r20
+ 73c:	41 98       	cbi	0x08, 1	; 8
+ 73e:	8f 71       	andi	r24, 0x1F	; 31
+ 740:	80 62       	ori	r24, 0x20	; 32
+ 742:	0e 94 db 02 	call	0x5b6	; 0x5b6 <spi_out_command>
+ 746:	c8 2f       	mov	r28, r24
+ 748:	6d 2f       	mov	r22, r29
+ 74a:	c8 01       	movw	r24, r16
+ 74c:	0e 94 7f 03 	call	0x6fe	; 0x6fe <spi_out_data_bytes>
+ 750:	41 9a       	sbi	0x08, 1	; 8
+ 752:	8c 2f       	mov	r24, r28
+ 754:	df 91       	pop	r29
+ 756:	cf 91       	pop	r28
+ 758:	1f 91       	pop	r17
+ 75a:	0f 91       	pop	r16
+ 75c:	08 95       	ret
+
+0000075e <nrf24_set_rx_address_pipe1>:
+ 75e:	45 e0       	ldi	r20, 0x05	; 5
+ 760:	bc 01       	movw	r22, r24
+ 762:	8b e0       	ldi	r24, 0x0B	; 11
+ 764:	0e 94 98 03 	call	0x730	; 0x730 <write_register_bytes>
+ 768:	08 95       	ret
+
+0000076a <spi_in_data_value>:
+ 76a:	2d 98       	cbi	0x05, 5	; 5
+ 76c:	97 e0       	ldi	r25, 0x07	; 7
+ 76e:	80 e0       	ldi	r24, 0x00	; 0
+ 770:	41 e0       	ldi	r20, 0x01	; 1
+ 772:	50 e0       	ldi	r21, 0x00	; 0
+ 774:	2d 9a       	sbi	0x05, 5	; 5
+ 776:	1c 9b       	sbis	0x03, 4	; 3
+ 778:	08 c0       	rjmp	.+16     	; 0x78a <spi_in_data_value+0x20>
+ 77a:	9a 01       	movw	r18, r20
+ 77c:	09 2e       	mov	r0, r25
+ 77e:	02 c0       	rjmp	.+4      	; 0x784 <spi_in_data_value+0x1a>
+ 780:	22 0f       	add	r18, r18
+ 782:	33 1f       	adc	r19, r19
+ 784:	0a 94       	dec	r0
+ 786:	e2 f7       	brpl	.-8      	; 0x780 <spi_in_data_value+0x16>
+ 788:	82 2b       	or	r24, r18
+ 78a:	2d 98       	cbi	0x05, 5	; 5
+ 78c:	91 50       	subi	r25, 0x01	; 1
+ 78e:	90 f7       	brcc	.-28     	; 0x774 <spi_in_data_value+0xa>
+ 790:	08 95       	ret
+
+00000792 <spi_in_data_bytes>:
+ 792:	0f 93       	push	r16
+ 794:	1f 93       	push	r17
+ 796:	cf 93       	push	r28
+ 798:	df 93       	push	r29
+ 79a:	ec 01       	movw	r28, r24
+ 79c:	66 23       	and	r22, r22
+ 79e:	89 f0       	breq	.+34     	; 0x7c2 <spi_in_data_bytes+0x30>
+ 7a0:	61 50       	subi	r22, 0x01	; 1
+ 7a2:	06 2f       	mov	r16, r22
+ 7a4:	10 e0       	ldi	r17, 0x00	; 0
+ 7a6:	0f 5f       	subi	r16, 0xFF	; 255
+ 7a8:	1f 4f       	sbci	r17, 0xFF	; 255
+ 7aa:	08 0f       	add	r16, r24
+ 7ac:	19 1f       	adc	r17, r25
+ 7ae:	0e 94 b5 03 	call	0x76a	; 0x76a <spi_in_data_value>
+ 7b2:	89 93       	st	Y+, r24
+ 7b4:	86 e0       	ldi	r24, 0x06	; 6
+ 7b6:	8a 95       	dec	r24
+ 7b8:	f1 f7       	brne	.-4      	; 0x7b6 <spi_in_data_bytes+0x24>
+ 7ba:	00 c0       	rjmp	.+0      	; 0x7bc <spi_in_data_bytes+0x2a>
+ 7bc:	c0 17       	cp	r28, r16
+ 7be:	d1 07       	cpc	r29, r17
+ 7c0:	b1 f7       	brne	.-20     	; 0x7ae <spi_in_data_bytes+0x1c>
+ 7c2:	df 91       	pop	r29
+ 7c4:	cf 91       	pop	r28
+ 7c6:	1f 91       	pop	r17
+ 7c8:	0f 91       	pop	r16
+ 7ca:	08 95       	ret
+
+000007cc <nrf24_get_payload_size>:
+ 7cc:	0f 93       	push	r16
+ 7ce:	1f 93       	push	r17
+ 7d0:	cf 93       	push	r28
+ 7d2:	8c 01       	movw	r16, r24
+ 7d4:	41 98       	cbi	0x08, 1	; 8
+ 7d6:	80 e6       	ldi	r24, 0x60	; 96
+ 7d8:	0e 94 db 02 	call	0x5b6	; 0x5b6 <spi_out_command>
+ 7dc:	c8 2f       	mov	r28, r24
+ 7de:	61 e0       	ldi	r22, 0x01	; 1
+ 7e0:	c8 01       	movw	r24, r16
+ 7e2:	0e 94 c9 03 	call	0x792	; 0x792 <spi_in_data_bytes>
+ 7e6:	41 9a       	sbi	0x08, 1	; 8
+ 7e8:	8c 2f       	mov	r24, r28
+ 7ea:	cf 91       	pop	r28
+ 7ec:	1f 91       	pop	r17
+ 7ee:	0f 91       	pop	r16
+ 7f0:	08 95       	ret
+
+000007f2 <nrf24_get_payload>:
+ 7f2:	0f 93       	push	r16
+ 7f4:	1f 93       	push	r17
+ 7f6:	cf 93       	push	r28
+ 7f8:	df 93       	push	r29
+ 7fa:	8c 01       	movw	r16, r24
+ 7fc:	d6 2f       	mov	r29, r22
+ 7fe:	41 98       	cbi	0x08, 1	; 8
+ 800:	81 e6       	ldi	r24, 0x61	; 97
+ 802:	0e 94 db 02 	call	0x5b6	; 0x5b6 <spi_out_command>
+ 806:	c8 2f       	mov	r28, r24
+ 808:	6d 2f       	mov	r22, r29
+ 80a:	c8 01       	movw	r24, r16
+ 80c:	0e 94 c9 03 	call	0x792	; 0x792 <spi_in_data_bytes>
+ 810:	41 9a       	sbi	0x08, 1	; 8
+ 812:	8c 2f       	mov	r24, r28
+ 814:	df 91       	pop	r29
+ 816:	cf 91       	pop	r28
+ 818:	1f 91       	pop	r17
+ 81a:	0f 91       	pop	r16
+ 81c:	08 95       	ret
+
+0000081e <read_register_bytes>:
+ 81e:	0f 93       	push	r16
+ 820:	1f 93       	push	r17
+ 822:	cf 93       	push	r28
+ 824:	df 93       	push	r29
+ 826:	8b 01       	movw	r16, r22
+ 828:	d4 2f       	mov	r29, r20
+ 82a:	41 98       	cbi	0x08, 1	; 8
+ 82c:	8f 71       	andi	r24, 0x1F	; 31
+ 82e:	0e 94 db 02 	call	0x5b6	; 0x5b6 <spi_out_command>
+ 832:	c8 2f       	mov	r28, r24
+ 834:	6d 2f       	mov	r22, r29
+ 836:	c8 01       	movw	r24, r16
+ 838:	0e 94 c9 03 	call	0x792	; 0x792 <spi_in_data_bytes>
+ 83c:	41 9a       	sbi	0x08, 1	; 8
+ 83e:	8c 2f       	mov	r24, r28
+ 840:	df 91       	pop	r29
+ 842:	cf 91       	pop	r28
+ 844:	1f 91       	pop	r17
+ 846:	0f 91       	pop	r16
+ 848:	08 95       	ret
+
+0000084a <nrf24_get_status>:
+}
+
+// get status register value and return by pointer;
+uint8_t nrf24_get_status(uint8_t * value)
+{
+	return read_register_bytes(RMAP_STATUS, value, 1);
+ 84a:	41 e0       	ldi	r20, 0x01	; 1
+ 84c:	bc 01       	movw	r22, r24
+ 84e:	87 e0       	ldi	r24, 0x07	; 7
+ 850:	0e 94 0f 04 	call	0x81e	; 0x81e <read_register_bytes>
+}
+ 854:	08 95       	ret
+
+00000856 <_exit>:
+ 856:	f8 94       	cli
+
+00000858 <__stop_program>:
+ 858:	ff cf       	rjmp	.-2      	; 0x858 <__stop_program>
