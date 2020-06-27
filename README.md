@@ -1,7 +1,6 @@
 # cgwireless
 
 Atmel Studio C project to send/receive wireless data using the nRF24L01+ module.
-Atmel Studio C project to display the elapsed time on a graphical OLED display.
 
 For use with the ATMega328P microcontroller and the nRF24L01+ module.
 Data can be shown on an OLED display.  
