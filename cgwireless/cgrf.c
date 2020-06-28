@@ -380,6 +380,19 @@ acknowledgment_t cgrf_retransmit()
 	return ack;
 }
 
+uint8_t cgrf_data_ready()
+{
+	uint8_t status = 0;
+	nrf24_get_status(&status);
+
+	if (status & STATUS_RX_DR)
+	{
+		return 1;
+	}
+	
+	return 0;
+}
+
 uint8_t cgrf_get_payload(uint8_t * data, uint8_t const size)
 {
 	uint8_t plsize = 0;

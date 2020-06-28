@@ -13,9 +13,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 #include "cgrf.h"
 #include "led.h"
-#include "button.h"
 #include "display.h"
 #include "cgoled.h"
 #include "nrf24l01.h"
@@ -29,138 +29,155 @@ void increment_data(uint8_t data[5]);
 void display_register(char * const text, uint8_t const size, uint8_t value);
 void display_address(uint8_t const * const addr);
 void display_registers();
+void setup_btn_interrupts();
+
+volatile uint8_t m_button_on = 0;
+
+// routine for PCMSK1 interrupt.
+ISR(PCINT1_vect)
+{
+	// button pressed (low)
+	if (!(PINC & (1 << PINC5)))
+	{
+		if (m_button_on == 0)
+			m_button_on = 1;
+		else
+			m_button_on = 0;
+	}
+}
+
+void setup_btn_interrupts()
+{
+	// button as input.
+	DDRC &= ~(1 << DDC5);
+
+	// PCMSK1 - Pin change mask register 1  (PCINT8 to PCINT14)
+	// bit 5 for PCINT13.
+	// PCIE1 bit in PCICR is set for PCMSK1.
+	// call global sei routine to start interrupts.
+	
+	PCMSK1 |= (1<<PCINT13);
+	PCICR |= (1<<PCIE1);
+	sei();
+}
 
 int main(void)
 {
 	//config_transmit();
 	//run_transmit();
-		
+
 	config_receive();
 	run_receive();
 }
 
 void config_transmit()
 {
-	config_buttons();
+	setup_btn_interrupts();
 	config_led();
-	//config_character_display();
-	oled_power_on();
 
 	cgrf_init();
 	cgrf_start_as_transmitter();
 	cgrf_power_down();
-	_delay_ms(5);	
+	_delay_ms(5);
 }
 
 void run_transmit()
 {
 	uint8_t buffer[32] = {1, 2, 3};
-	acknowledgment_t ack = success;
 	uint8_t running = 0;
-	uint8_t sent = 0;
-	uint8_t failed = 0;
+	acknowledgment_t ack = success;
 	
 	while (1)
 	{
-		if (button1_down())
+		if (running != m_button_on)
 		{
 			if (running == 0)
-			{
 				running = 1;
+			else
+				running = 0;
+
+			if (running == 1)
+			{
 				cgrf_power_up();
 				led_on();
 			}
 			else
 			{
-				running = 0;
 				cgrf_power_down();
 				led_off();
 			}
-			
-			_delay_ms(100);
 		}
 		
 		if (running)
 		{
 			ack = cgrf_transmit_data(&buffer[0], 3);
-			
+		
 			if (ack == success)
-			{
 				increment_data(buffer);
-				sent++;
-			}
-			else
-			{
-				failed++;
-			}
 		}
 
-		//display_string("STATUS", 6, 1, 1);
-		//display_number((uint8_t)ack, 8, 1);
-		//display_number(sent, 1, 2);
-		//display_number(failed, 5, 2);
-		_delay_ms(200);
+		_delay_ms(50);
 	}	
 }
 
 void config_receive()
 {
-	config_buttons();
+	setup_btn_interrupts();
 	config_led();
 	config_character_display();
 	oled_power_on();
 
 	cgrf_init();
 	cgrf_start_as_reciever();
+	led_on();
 	_delay_ms(5);
 }
 
 void run_receive()
 {
 	uint8_t buffer[32] = {0, 0, 0};
-
 	uint8_t running = 1;
-	uint8_t received = 0;
-	uint8_t failed = 0;
 	uint8_t status = 0;
 
-	if (running != 0)
-		led_on();
-
-	//display_registers();
-	oled_clear();
+	display_string("Listening",9,1,1);
+	m_button_on = 1;
 
 	while (1)
 	{
-		if (button1_down())
+		if (running != m_button_on)
 		{
 			if (running == 0)
-			{
 				running = 1;
+			else
+				running = 0;
+
+			if (running == 1)
+			{
 				cgrf_power_up();
 				led_on();
-				oled_power_on();
+				oled_power_on();	
 			}
 			else
 			{
-				running = 0;
 				cgrf_power_down();
 				led_off();
 				oled_power_off();
 			}
-			
-			_delay_ms(100);
 		}
 		
 		if (running == 1)
 		{
-			status = cgrf_get_payload(&buffer[0], 3);
-			
-			display_binary(status, 1, 1);
-			display_number(buffer[0], 1, 2);
-			display_number(buffer[1], 5, 2);
-			display_number(buffer[2], 8, 2);
-			_delay_ms(50);
+			if (cgrf_data_ready() == 1)
+			{
+				status = cgrf_get_payload(&buffer[0], 3);
+				
+				display_binary(status, 1, 1);
+				display_string(" ", 1, 9, 1);
+				display_number(buffer[0], 1, 2);
+				display_number(buffer[1], 5, 2);
+				display_number(buffer[2], 8, 2);
+			}
+	
 		}
 	}
 }

@@ -136,12 +136,6 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="button.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="button.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="cgoled.c">
       <SubType>compile</SubType>
     </Compile>

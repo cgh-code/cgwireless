@@ -13,9 +13,6 @@ Discarded input sections
 
  .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .text          0x00000000        0x0 button.o
- .data          0x00000000        0x0 button.o
- .bss           0x00000000        0x0 button.o
  .text          0x00000000        0x0 cgoled.o
  .data          0x00000000        0x0 cgoled.o
  .bss           0x00000000        0x0 cgoled.o
@@ -76,8 +73,6 @@ Discarded input sections
  .rodata        0x00000000       0x10 display.o
  .text.display_hex
                 0x00000000       0x7c display.o
- .text.display_string
-                0x00000000       0x3a display.o
  .text          0x00000000        0x0 led.o
  .data          0x00000000        0x0 led.o
  .bss           0x00000000        0x0 led.o
@@ -85,17 +80,15 @@ Discarded input sections
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
  .text.config_transmit
-                0x00000000       0x26 main.o
+                0x00000000       0x22 main.o
  .text.increment_data
                 0x00000000       0x1c main.o
  .text.run_transmit
-                0x00000000       0x8a main.o
+                0x00000000       0x88 main.o
  .text.display_register
                 0x00000000       0x2c main.o
  .text.display_address
                 0x00000000       0x26 main.o
- .rodata.str1.1
-                0x00000000       0xbb main.o
  .text.display_registers
                 0x00000000      0x1f0 main.o
  .text          0x00000000        0x0 nrf24l01.o
@@ -223,7 +216,6 @@ Linker script and memory map
 
 Address of section .data set to 0x800100
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
-LOAD button.o
 LOAD cgoled.o
 LOAD cgrf.o
 LOAD display.o
@@ -339,7 +331,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x85a
+.text           0x00000000      0x900
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -413,7 +405,6 @@ END GROUP
                 0x000000a2                __vector_19
                 0x000000a2                __vector_7
                 0x000000a2                __vector_5
-                0x000000a2                __vector_4
                 0x000000a2                __vector_9
                 0x000000a2                __vector_2
                 0x000000a2                __vector_21
@@ -426,218 +417,224 @@ END GROUP
                 0x000000a2                __vector_20
                 0x000000a6                . = ALIGN (0x2)
  *(.text.*)
- .text.config_buttons
-                0x000000a6        0x4 button.o
-                0x000000a6                config_buttons
- .text.button1_down
-                0x000000aa        0xe button.o
-                0x000000aa                button1_down
  .text.oled_config
-                0x000000b8       0x18 cgoled.o
-                0x000000b8                oled_config
+                0x000000a6       0x18 cgoled.o
+                0x000000a6                oled_config
  .text.busy_wait
-                0x000000d0       0x14 cgoled.o
-                0x000000d0                busy_wait
+                0x000000be       0x14 cgoled.o
+                0x000000be                busy_wait
  .text.set_data_bus
-                0x000000e4       0x52 cgoled.o
-                0x000000e4                set_data_bus
+                0x000000d2       0x52 cgoled.o
+                0x000000d2                set_data_bus
  .text.oled_write_cmd_busy
-                0x00000136       0x1c cgoled.o
-                0x00000136                oled_write_cmd_busy
+                0x00000124       0x1c cgoled.o
+                0x00000124                oled_write_cmd_busy
  .text.oled_write_cmd
-                0x00000152        0x8 cgoled.o
-                0x00000152                oled_write_cmd
+                0x00000140        0x8 cgoled.o
+                0x00000140                oled_write_cmd
  .text.oled_clear
-                0x0000015a        0x8 cgoled.o
-                0x0000015a                oled_clear
+                0x00000148        0x8 cgoled.o
+                0x00000148                oled_clear
  .text.oled_cursor_home
-                0x00000162        0x8 cgoled.o
-                0x00000162                oled_cursor_home
+                0x00000150        0x8 cgoled.o
+                0x00000150                oled_cursor_home
  .text.oled_incremental_cursor
-                0x0000016a        0x8 cgoled.o
-                0x0000016a                oled_incremental_cursor
+                0x00000158        0x8 cgoled.o
+                0x00000158                oled_incremental_cursor
  .text.oled_power_on
-                0x00000172        0x8 cgoled.o
-                0x00000172                oled_power_on
+                0x00000160        0x8 cgoled.o
+                0x00000160                oled_power_on
  .text.oled_power_off
-                0x0000017a        0x8 cgoled.o
-                0x0000017a                oled_power_off
+                0x00000168        0x8 cgoled.o
+                0x00000168                oled_power_off
  .text.oled_write_data
-                0x00000182       0x1a cgoled.o
-                0x00000182                oled_write_data
+                0x00000170       0x1a cgoled.o
+                0x00000170                oled_write_data
  .text.get_ddram_address_n1
-                0x0000019c       0x1c cgoled.o
-                0x0000019c                get_ddram_address_n1
+                0x0000018a       0x1c cgoled.o
+                0x0000018a                get_ddram_address_n1
  .text.oled_write_character
-                0x000001b8       0x1c cgoled.o
-                0x000001b8                oled_write_character
+                0x000001a6       0x1c cgoled.o
+                0x000001a6                oled_write_character
  .text.cgrf_init
-                0x000001d4        0x6 cgrf.o
-                0x000001d4                cgrf_init
+                0x000001c2        0x6 cgrf.o
+                0x000001c2                cgrf_init
+ .text.cgrf_data_ready
+                0x000001c8       0x24 cgrf.o
+                0x000001c8                cgrf_data_ready
  .text.cgrf_get_payload
-                0x000001da       0x60 cgrf.o
-                0x000001da                cgrf_get_payload
+                0x000001ec       0x60 cgrf.o
+                0x000001ec                cgrf_get_payload
  .text.set_auto_ack
-                0x0000023a       0x14 cgrf.o
-                0x0000023a                set_auto_ack
+                0x0000024c       0x14 cgrf.o
+                0x0000024c                set_auto_ack
  .text.set_dynamic_payload
-                0x0000024e       0x14 cgrf.o
-                0x0000024e                set_dynamic_payload
+                0x00000260       0x14 cgrf.o
+                0x00000260                set_dynamic_payload
  .text.set_features
-                0x00000262       0x36 cgrf.o
-                0x00000262                set_features
+                0x00000274       0x36 cgrf.o
+                0x00000274                set_features
  .text.set_payload1_size
-                0x00000298        0xa cgrf.o
-                0x00000298                set_payload1_size
+                0x000002aa        0xa cgrf.o
+                0x000002aa                set_payload1_size
  .text.set_config
-                0x000002a2       0x52 cgrf.o
-                0x000002a2                set_config
+                0x000002b4       0x52 cgrf.o
+                0x000002b4                set_config
  .text.cgrf_power_up
-                0x000002f4       0x16 cgrf.o
-                0x000002f4                cgrf_power_up
+                0x00000306       0x16 cgrf.o
+                0x00000306                cgrf_power_up
  .text.cgrf_power_down
-                0x0000030a       0x18 cgrf.o
-                0x0000030a                cgrf_power_down
+                0x0000031c       0x18 cgrf.o
+                0x0000031c                cgrf_power_down
  .text.set_channel
-                0x00000322        0xa cgrf.o
-                0x00000322                set_channel
+                0x00000334        0xa cgrf.o
+                0x00000334                set_channel
  .text.set_rf_setup
-                0x0000032c       0x32 cgrf.o
-                0x0000032c                set_rf_setup
+                0x0000033e       0x32 cgrf.o
+                0x0000033e                set_rf_setup
  .text.set_pipe1_address
-                0x0000035e        0xa cgrf.o
-                0x0000035e                set_pipe1_address
+                0x00000370        0xa cgrf.o
+                0x00000370                set_pipe1_address
  .text.cgrf_start_as_reciever
-                0x00000368       0x7e cgrf.o
-                0x00000368                cgrf_start_as_reciever
+                0x0000037a       0x7e cgrf.o
+                0x0000037a                cgrf_start_as_reciever
  .text.config_character_display
-                0x000003e6       0x18 display.o
-                0x000003e6                config_character_display
+                0x000003f8       0x18 display.o
+                0x000003f8                config_character_display
  .text.display_number
-                0x000003fe       0x6a display.o
-                0x000003fe                display_number
+                0x00000410       0x6a display.o
+                0x00000410                display_number
  .text.display_binary
-                0x00000468       0x54 display.o
-                0x00000468                display_binary
+                0x0000047a       0x54 display.o
+                0x0000047a                display_binary
+ .text.display_string
+                0x000004ce       0x3a display.o
+                0x000004ce                display_string
  .text.config_led
-                0x000004bc        0x4 led.o
-                0x000004bc                config_led
- .text.led_on   0x000004c0        0x4 led.o
-                0x000004c0                led_on
- .text.led_off  0x000004c4        0x4 led.o
-                0x000004c4                led_off
+                0x00000508        0x4 led.o
+                0x00000508                config_led
+ .text.led_on   0x0000050c        0x4 led.o
+                0x0000050c                led_on
+ .text.led_off  0x00000510        0x4 led.o
+                0x00000510                led_off
+ .text.__vector_4
+                0x00000514       0x30 main.o
+                0x00000514                __vector_4
+ .text.setup_btn_interrupts
+                0x00000544       0x1a main.o
+                0x00000544                setup_btn_interrupts
  .text.config_receive
-                0x000004c8       0x26 main.o
-                0x000004c8                config_receive
+                0x0000055e       0x2a main.o
+                0x0000055e                config_receive
  .text.run_receive
-                0x000004ee       0xa8 main.o
-                0x000004ee                run_receive
- .text.main     0x00000596        0x8 main.o
-                0x00000596                main
+                0x00000588       0xb4 main.o
+                0x00000588                run_receive
+ .text.main     0x0000063c        0x8 main.o
+                0x0000063c                main
  .text.nrf24_configure_ports
-                0x0000059e       0x10 nrf24l01.o
-                0x0000059e                nrf24_configure_ports
+                0x00000644       0x10 nrf24l01.o
+                0x00000644                nrf24_configure_ports
  .text.nrf24_set_ce_low
-                0x000005ae        0x4 nrf24l01.o
-                0x000005ae                nrf24_set_ce_low
+                0x00000654        0x4 nrf24l01.o
+                0x00000654                nrf24_set_ce_low
  .text.nrf24_set_ce_high
-                0x000005b2        0x4 nrf24l01.o
-                0x000005b2                nrf24_set_ce_high
+                0x00000658        0x4 nrf24l01.o
+                0x00000658                nrf24_set_ce_high
  .text.spi_out_command
-                0x000005b6       0x44 nrf24l01.o
-                0x000005b6                spi_out_command
+                0x0000065c       0x44 nrf24l01.o
+                0x0000065c                spi_out_command
  .text.nrf24_flush_tx
-                0x000005fa        0xc nrf24l01.o
-                0x000005fa                nrf24_flush_tx
+                0x000006a0        0xc nrf24l01.o
+                0x000006a0                nrf24_flush_tx
  .text.nrf24_flush_rx
-                0x00000606        0xc nrf24l01.o
-                0x00000606                nrf24_flush_rx
+                0x000006ac        0xc nrf24l01.o
+                0x000006ac                nrf24_flush_rx
  .text.spi_out_data_value
-                0x00000612       0x2a nrf24l01.o
-                0x00000612                spi_out_data_value
+                0x000006b8       0x2a nrf24l01.o
+                0x000006b8                spi_out_data_value
  .text.write_register_value
-                0x0000063c       0x22 nrf24l01.o
-                0x0000063c                write_register_value
+                0x000006e2       0x22 nrf24l01.o
+                0x000006e2                write_register_value
  .text.nrf24_set_config
-                0x0000065e        0xa nrf24l01.o
-                0x0000065e                nrf24_set_config
+                0x00000704        0xa nrf24l01.o
+                0x00000704                nrf24_set_config
  .text.nrf24_set_en_aa
-                0x00000668        0xa nrf24l01.o
-                0x00000668                nrf24_set_en_aa
+                0x0000070e        0xa nrf24l01.o
+                0x0000070e                nrf24_set_en_aa
  .text.nrf24_set_en_rxaddr
-                0x00000672        0xa nrf24l01.o
-                0x00000672                nrf24_set_en_rxaddr
+                0x00000718        0xa nrf24l01.o
+                0x00000718                nrf24_set_en_rxaddr
  .text.nrf24_set_setup_aw
-                0x0000067c        0xa nrf24l01.o
-                0x0000067c                nrf24_set_setup_aw
+                0x00000722        0xa nrf24l01.o
+                0x00000722                nrf24_set_setup_aw
  .text.nrf24_set_setup_retr
-                0x00000686        0xa nrf24l01.o
-                0x00000686                nrf24_set_setup_retr
+                0x0000072c        0xa nrf24l01.o
+                0x0000072c                nrf24_set_setup_retr
  .text.nrf24_set_rf_ch
-                0x00000690        0xa nrf24l01.o
-                0x00000690                nrf24_set_rf_ch
+                0x00000736        0xa nrf24l01.o
+                0x00000736                nrf24_set_rf_ch
  .text.nrf24_set_rf_setup
-                0x0000069a        0xa nrf24l01.o
-                0x0000069a                nrf24_set_rf_setup
+                0x00000740        0xa nrf24l01.o
+                0x00000740                nrf24_set_rf_setup
  .text.nrf24_set_status
-                0x000006a4        0xa nrf24l01.o
-                0x000006a4                nrf24_set_status
+                0x0000074a        0xa nrf24l01.o
+                0x0000074a                nrf24_set_status
  .text.nrf24_set_rx_pw_p0
-                0x000006ae        0xa nrf24l01.o
-                0x000006ae                nrf24_set_rx_pw_p0
+                0x00000754        0xa nrf24l01.o
+                0x00000754                nrf24_set_rx_pw_p0
  .text.nrf24_set_rx_pw_p1
-                0x000006b8        0xa nrf24l01.o
-                0x000006b8                nrf24_set_rx_pw_p1
+                0x0000075e        0xa nrf24l01.o
+                0x0000075e                nrf24_set_rx_pw_p1
  .text.nrf24_set_rx_pw_p2
-                0x000006c2        0xa nrf24l01.o
-                0x000006c2                nrf24_set_rx_pw_p2
+                0x00000768        0xa nrf24l01.o
+                0x00000768                nrf24_set_rx_pw_p2
  .text.nrf24_set_rx_pw_p3
-                0x000006cc        0xa nrf24l01.o
-                0x000006cc                nrf24_set_rx_pw_p3
+                0x00000772        0xa nrf24l01.o
+                0x00000772                nrf24_set_rx_pw_p3
  .text.nrf24_set_rx_pw_p4
-                0x000006d6        0xa nrf24l01.o
-                0x000006d6                nrf24_set_rx_pw_p4
+                0x0000077c        0xa nrf24l01.o
+                0x0000077c                nrf24_set_rx_pw_p4
  .text.nrf24_set_rx_pw_p5
-                0x000006e0        0xa nrf24l01.o
-                0x000006e0                nrf24_set_rx_pw_p5
+                0x00000786        0xa nrf24l01.o
+                0x00000786                nrf24_set_rx_pw_p5
  .text.nrf24_set_dynpd
-                0x000006ea        0xa nrf24l01.o
-                0x000006ea                nrf24_set_dynpd
+                0x00000790        0xa nrf24l01.o
+                0x00000790                nrf24_set_dynpd
  .text.nrf24_set_feature
-                0x000006f4        0xa nrf24l01.o
-                0x000006f4                nrf24_set_feature
+                0x0000079a        0xa nrf24l01.o
+                0x0000079a                nrf24_set_feature
  .text.spi_out_data_bytes
-                0x000006fe       0x32 nrf24l01.o
-                0x000006fe                spi_out_data_bytes
+                0x000007a4       0x32 nrf24l01.o
+                0x000007a4                spi_out_data_bytes
  .text.write_register_bytes
-                0x00000730       0x2e nrf24l01.o
-                0x00000730                write_register_bytes
+                0x000007d6       0x2e nrf24l01.o
+                0x000007d6                write_register_bytes
  .text.nrf24_set_rx_address_pipe1
-                0x0000075e        0xc nrf24l01.o
-                0x0000075e                nrf24_set_rx_address_pipe1
+                0x00000804        0xc nrf24l01.o
+                0x00000804                nrf24_set_rx_address_pipe1
  .text.spi_in_data_value
-                0x0000076a       0x28 nrf24l01.o
-                0x0000076a                spi_in_data_value
+                0x00000810       0x28 nrf24l01.o
+                0x00000810                spi_in_data_value
  .text.spi_in_data_bytes
-                0x00000792       0x3a nrf24l01.o
-                0x00000792                spi_in_data_bytes
+                0x00000838       0x3a nrf24l01.o
+                0x00000838                spi_in_data_bytes
  .text.nrf24_get_payload_size
-                0x000007cc       0x26 nrf24l01.o
-                0x000007cc                nrf24_get_payload_size
+                0x00000872       0x26 nrf24l01.o
+                0x00000872                nrf24_get_payload_size
  .text.nrf24_get_payload
-                0x000007f2       0x2c nrf24l01.o
-                0x000007f2                nrf24_get_payload
+                0x00000898       0x2c nrf24l01.o
+                0x00000898                nrf24_get_payload
  .text.read_register_bytes
-                0x0000081e       0x2c nrf24l01.o
-                0x0000081e                read_register_bytes
+                0x000008c4       0x2c nrf24l01.o
+                0x000008c4                read_register_bytes
  .text.nrf24_get_status
-                0x0000084a        0xc nrf24l01.o
-                0x0000084a                nrf24_get_status
-                0x00000856                . = ALIGN (0x2)
+                0x000008f0        0xc nrf24l01.o
+                0x000008f0                nrf24_get_status
+                0x000008fc                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000856        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000856                _exit
-                0x00000856                exit
+ .fini9         0x000008fc        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000008fc                _exit
+                0x000008fc                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -656,11 +653,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000856        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000008fc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000085a                _etext = .
+                0x00000900                _etext = .
 
-.data           0x00800100        0xc load address 0x0000085a
+.data           0x00800100       0xd0 load address 0x00000900
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -680,31 +677,36 @@ END GROUP
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
+ .rodata.str1.1
+                0x0080010b       0xc5 main.o
+                                 0xc7 (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x0080010c                . = ALIGN (0x2)
- *fill*         0x0080010b        0x1 
-                0x0080010c                _edata = .
-                0x0080010c                PROVIDE (__data_end, .)
+                0x008001d0                . = ALIGN (0x2)
+                0x008001d0                _edata = .
+                0x008001d0                PROVIDE (__data_end, .)
 
-.bss            0x0080010c        0x3
-                0x0080010c                PROVIDE (__bss_start, .)
+.bss            0x008001d0        0x4
+                0x008001d0                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.m_payload_size
-                0x0080010c        0x1 cgrf.o
+                0x008001d0        0x1 cgrf.o
  .bss.m_auto_ack
-                0x0080010d        0x1 cgrf.o
- .bss.m_mode    0x0080010e        0x1 cgrf.o
+                0x008001d1        0x1 cgrf.o
+ .bss.m_mode    0x008001d2        0x1 cgrf.o
+ .bss.m_button_on
+                0x008001d3        0x1 main.o
+                0x008001d3                m_button_on
  *(COMMON)
-                0x0080010f                PROVIDE (__bss_end, .)
-                0x0000085a                __data_load_start = LOADADDR (.data)
-                0x00000866                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x008001d4                PROVIDE (__bss_end, .)
+                0x00000900                __data_load_start = LOADADDR (.data)
+                0x000009d0                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080010f        0x0
+.noinit         0x008001d4        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080010f                _end = .
+                0x008001d4                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -746,9 +748,8 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 button.o
+ .comment       0x00000000       0x30 cgoled.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 cgoled.o
  .comment       0x00000030       0x31 cgrf.o
  .comment       0x00000030       0x31 display.o
  .comment       0x00000030       0x31 led.o
@@ -775,94 +776,86 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x498
+.debug_aranges  0x00000000      0x488
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x28 button.o
+                0x00000000       0xc0 cgoled.o
  .debug_aranges
-                0x00000028       0xc0 cgoled.o
+                0x000000c0       0xf0 cgrf.o
  .debug_aranges
-                0x000000e8       0xe8 cgrf.o
+                0x000001b0       0x48 display.o
  .debug_aranges
-                0x000001d0       0x48 display.o
+                0x000001f8       0x30 led.o
  .debug_aranges
-                0x00000218       0x30 led.o
+                0x00000228       0x70 main.o
  .debug_aranges
-                0x00000248       0x60 main.o
- .debug_aranges
-                0x000002a8      0x1f0 nrf24l01.o
+                0x00000298      0x1f0 nrf24l01.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x40e8
+.debug_info     0x00000000     0x4004
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4       0xa4 button.o
- .debug_info    0x00000698      0x6b0 cgoled.o
- .debug_info    0x00000d48      0xd33 cgrf.o
- .debug_info    0x00001a7b      0x492 display.o
- .debug_info    0x00001f0d       0xaf led.o
- .debug_info    0x00001fbc      0xda5 main.o
- .debug_info    0x00002d61     0x1387 nrf24l01.o
+ .debug_info    0x000005f4      0x6b0 cgoled.o
+ .debug_info    0x00000ca4      0xd76 cgrf.o
+ .debug_info    0x00001a1a      0x492 display.o
+ .debug_info    0x00001eac       0xaf led.o
+ .debug_info    0x00001f5b      0xd22 main.o
+ .debug_info    0x00002c7d     0x1387 nrf24l01.o
 
-.debug_abbrev   0x00000000     0x1073
+.debug_abbrev   0x00000000     0x1036
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_abbrev  0x000005a2       0x6b button.o
- .debug_abbrev  0x0000060d      0x239 cgoled.o
- .debug_abbrev  0x00000846      0x1da cgrf.o
- .debug_abbrev  0x00000a20      0x131 display.o
- .debug_abbrev  0x00000b51       0x51 led.o
- .debug_abbrev  0x00000ba2      0x249 main.o
- .debug_abbrev  0x00000deb      0x288 nrf24l01.o
+ .debug_abbrev  0x000005a2      0x239 cgoled.o
+ .debug_abbrev  0x000007db      0x1da cgrf.o
+ .debug_abbrev  0x000009b5      0x131 display.o
+ .debug_abbrev  0x00000ae6       0x51 led.o
+ .debug_abbrev  0x00000b37      0x277 main.o
+ .debug_abbrev  0x00000dae      0x288 nrf24l01.o
 
-.debug_line     0x00000000     0x1e75
+.debug_line     0x00000000     0x1df5
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000133       0xbf button.o
- .debug_line    0x000001f2      0x4c2 cgoled.o
- .debug_line    0x000006b4      0x6ad cgrf.o
- .debug_line    0x00000d61      0x1de display.o
- .debug_line    0x00000f3f       0xcc led.o
- .debug_line    0x0000100b      0x500 main.o
- .debug_line    0x0000150b      0x96a nrf24l01.o
+ .debug_line    0x00000133      0x4c2 cgoled.o
+ .debug_line    0x000005f5      0x6d6 cgrf.o
+ .debug_line    0x00000ccb      0x1de display.o
+ .debug_line    0x00000ea9       0xcc led.o
+ .debug_line    0x00000f75      0x516 main.o
+ .debug_line    0x0000148b      0x96a nrf24l01.o
 
-.debug_frame    0x00000000      0xa7c
+.debug_frame    0x00000000      0xa98
  *(.debug_frame)
- .debug_frame   0x00000000       0x34 button.o
- .debug_frame   0x00000034      0x1a8 cgoled.o
- .debug_frame   0x000001dc      0x218 cgrf.o
- .debug_frame   0x000003f4       0xe4 display.o
- .debug_frame   0x000004d8       0x44 led.o
- .debug_frame   0x0000051c       0xf8 main.o
- .debug_frame   0x00000614      0x468 nrf24l01.o
+ .debug_frame   0x00000000      0x1a8 cgoled.o
+ .debug_frame   0x000001a8      0x238 cgrf.o
+ .debug_frame   0x000003e0       0xe4 display.o
+ .debug_frame   0x000004c4       0x44 led.o
+ .debug_frame   0x00000508      0x128 main.o
+ .debug_frame   0x00000630      0x468 nrf24l01.o
 
-.debug_str      0x00000000      0xf19
+.debug_str      0x00000000      0xf1d
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x14b button.o
-                                0x17f (size before relaxing)
- .debug_str     0x00000353      0x1a5 cgoled.o
+ .debug_str     0x00000208      0x2c6 cgoled.o
                                 0x316 (size before relaxing)
- .debug_str     0x000004f8      0x5f7 cgrf.o
-                                0x7dc (size before relaxing)
- .debug_str     0x00000aef       0x84 display.o
+ .debug_str     0x000004ce      0x607 cgrf.o
+                                0x7ec (size before relaxing)
+ .debug_str     0x00000ad5       0x84 display.o
                                 0x25d (size before relaxing)
- .debug_str     0x00000b73       0x25 led.o
+ .debug_str     0x00000b59       0x25 led.o
                                 0x174 (size before relaxing)
- .debug_str     0x00000b98      0x231 main.o
-                                0x526 (size before relaxing)
- .debug_str     0x00000dc9      0x150 nrf24l01.o
+ .debug_str     0x00000b7e      0x24f main.o
+                                0x52d (size before relaxing)
+ .debug_str     0x00000dcd      0x150 nrf24l01.o
                                 0x691 (size before relaxing)
 
-.debug_loc      0x00000000     0x285f
+.debug_loc      0x00000000     0x2829
  *(.debug_loc)
  .debug_loc     0x00000000      0x683 cgoled.o
- .debug_loc     0x00000683      0x517 cgrf.o
- .debug_loc     0x00000b9a      0x5db display.o
- .debug_loc     0x00001175      0x5d0 main.o
- .debug_loc     0x00001745     0x111a nrf24l01.o
+ .debug_loc     0x00000683      0x55f cgrf.o
+ .debug_loc     0x00000be2      0x5db display.o
+ .debug_loc     0x000011bd      0x552 main.o
+ .debug_loc     0x0000170f     0x111a nrf24l01.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -884,12 +877,11 @@ END GROUP
 
 .debug_ranges   0x00000000      0x470
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x18 button.o
- .debug_ranges  0x00000018       0xc8 cgoled.o
- .debug_ranges  0x000000e0       0xd8 cgrf.o
- .debug_ranges  0x000001b8       0x38 display.o
- .debug_ranges  0x000001f0       0x20 led.o
- .debug_ranges  0x00000210       0x50 main.o
+ .debug_ranges  0x00000000       0xc8 cgoled.o
+ .debug_ranges  0x000000c8       0xe0 cgrf.o
+ .debug_ranges  0x000001a8       0x38 display.o
+ .debug_ranges  0x000001e0       0x20 led.o
+ .debug_ranges  0x00000200       0x60 main.o
  .debug_ranges  0x00000260      0x210 nrf24l01.o
 
 .debug_macro

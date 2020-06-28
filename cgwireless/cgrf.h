@@ -90,6 +90,7 @@ uint8_t cgrf_power_down();
 acknowledgment_t cgrf_transmit_data(uint8_t const * const data, uint8_t const size);
 acknowledgment_t cgrf_retransmit();
 
+uint8_t cgrf_data_ready();
 uint8_t cgrf_get_payload(uint8_t * data, uint8_t const size);
 
 // check status for auto acknowledgment.
