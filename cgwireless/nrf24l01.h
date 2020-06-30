@@ -159,6 +159,10 @@ uint8_t nrf24_get_rx_address_pipe1(uint8_t * ptr);
 // set the rx address data pipe 1.
 uint8_t nrf24_set_rx_address_pipe1(uint8_t addr[5]);
 
+// get the carrier detect.
+uint8_t nrf24_get_cd(uint8_t * value);
+
+
 // send data.
 uint8_t nrf24_transmit_data(nrf24_mode_t const mode, uint8_t const * const data, uint8_t const size);
 

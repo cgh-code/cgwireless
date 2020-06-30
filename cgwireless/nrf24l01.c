@@ -52,7 +52,7 @@
 #define RMAP_RF_SETUP    0x06
 #define RMAP_STATUS		 0x07
 #define RMAP_OBSERVE_TX  0x08
-#define RMAP_RPD         0x09
+#define RMAP_CD          0x09
 #define RMAP_RX_ADDR_P0  0x0A
 #define RMAP_RX_ADDR_P1  0x0B
 #define RMAP_RX_ADDR_P2  0x0C
@@ -395,6 +395,12 @@ uint8_t nrf24_get_rx_address_pipe1(uint8_t * ptr)
 uint8_t nrf24_set_rx_address_pipe1(uint8_t addr[5])
 {
 	return write_register_bytes(RMAP_RX_ADDR_P1, addr, 5);
+}
+
+// get the carrier detect.
+uint8_t nrf24_get_cd(uint8_t * value)
+{
+	return read_register_bytes(RMAP_CD, value, 1);
 }
 
 

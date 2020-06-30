@@ -9,27 +9,42 @@
 #define F_CPU 1000000UL		// define it now as 8 MHz unsigned long
 #endif
 
+#define ADMUX_AREF			0x00
+#define ADMUX_AVCC			0x40
+#define ADMUX_INTERAL_1V	0xC0
+#define ADMUX_10_BITS		0x00
+#define ADMUX_8_BITS		0x20
+#define ADC_PRESCALER_2		0x01
+#define ADC_PRESCALER_4		0x02
+#define ADC_PRESCALER_8		0x03
+#define ADC_PRESCALER_16	0x04
+#define ADC_PRESCALER_32	0x05
+#define ADC_PRESCALER_64	0x06
+#define ADC_PRESCALER_128	0x07
+
 #include <avr/io.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
-#include "cgrf.h"
-#include "led.h"
-#include "display.h"
 #include "cgoled.h"
 #include "nrf24l01.h"
+#include "cgrf.h"
+#include "display.h"
+#include "debug.h"
+
+void setup_btn_interrupts();
+void setup_led(void);
+void setup_light_sensor();
+void led_on(void);
+void led_off(void);
+void single_adc_conversion();
 
 void config_transmit();
 void run_transmit();
 void config_receive();
 void run_receive();
-
-void increment_data(uint8_t data[5]);
-void display_register(char * const text, uint8_t const size, uint8_t value);
-void display_address(uint8_t const * const addr);
-void display_registers();
-void setup_btn_interrupts();
+uint8_t find_channel();
 
 volatile uint8_t m_button_on = 0;
 
@@ -61,19 +76,76 @@ void setup_btn_interrupts()
 	sei();
 }
 
+void setup_led(void)
+{
+	// setup led for output.
+	DDRC |= (1 << DDC4);
+}
+
+// switch led on.
+void led_on(void)
+{
+	PORTC |= (1 << PORTC4);
+}
+
+// switch led off.
+void led_off(void)
+{
+	PORTC &= ~(1 << PORTC4);
+}
+
+// setup light sensor as analogue input (PC3 / ADC3).
+void setup_light_sensor()
+{
+	// configure port C light sensor as input.
+	DDRC &= ~(1 << DDC3);
+	
+	// ADMUX - Multiplexer selection register.
+	//
+	// Use AVCC as voltage reference.
+	// ADLAR bit set to left adjusted for 8 bit results.
+	// MUX binary value of 0011 (0x03) set for ADC3 as analogue input.
+	ADMUX |= ADMUX_AVCC | ADMUX_8_BITS | 0x03;
+
+	// ADCSRA - Control and status register A.
+	//
+	// The ADEN bit (1 << 7) must be set to 1 to do any ADC operations.
+	//
+	// AVR ADC must be clocked at the frequency between 50 and 200kHz. 
+	// So we need to set proper prescaller bits so that scaled system clock would fit in this range. 
+	// Examples
+	// --------
+	// for AVR clocked at 16MHz, use 128 scaling factor which gives 16000000/128 = 125kHz of ADC clock.
+	// for AVR clocked at 8MHz, use 64 scaling factor which gives 8000000/64 = 125kHz of ADC clock.
+	// for AVR clocked at 1MHz, use 64 scaling factor which gives 1000000/8 = 125kHz of ADC clock.
+
+	ADCSRA |= (1 << 7) | ADC_PRESCALER_8;
+}
+
+void single_adc_conversion()
+{
+	// Start an ADC conversion by setting ADSC bit (bit 6)
+	ADCSRA |= (1 << ADSC);
+	
+	// Wait until the ADSC bit has been cleared
+	while(ADCSRA & (1 << ADSC));
+}
+
 int main(void)
 {
 	//config_transmit();
 	//run_transmit();
 
 	config_receive();
+	//find_channel();
 	run_receive();
 }
 
 void config_transmit()
 {
 	setup_btn_interrupts();
-	config_led();
+	setup_led();
+	setup_light_sensor();
 
 	cgrf_init();
 	cgrf_start_as_transmitter();
@@ -85,7 +157,6 @@ void run_transmit()
 {
 	uint8_t buffer[32] = {1, 2, 3};
 	uint8_t running = 0;
-	acknowledgment_t ack = success;
 	
 	while (1)
 	{
@@ -110,10 +181,12 @@ void run_transmit()
 		
 		if (running)
 		{
-			ack = cgrf_transmit_data(&buffer[0], 3);
-		
-			if (ack == success)
-				increment_data(buffer);
+			single_adc_conversion();
+			buffer[0] = ADCH;
+			buffer[1] = buffer[1] + 1;
+			buffer[2] = 0;
+
+			cgrf_transmit_data(&buffer[0], 3);
 		}
 
 		_delay_ms(50);
@@ -123,7 +196,7 @@ void run_transmit()
 void config_receive()
 {
 	setup_btn_interrupts();
-	config_led();
+	setup_led();
 	config_character_display();
 	oled_power_on();
 
@@ -137,10 +210,11 @@ void run_receive()
 {
 	uint8_t buffer[32] = {0, 0, 0};
 	uint8_t running = 1;
-	uint8_t status = 0;
 
-	display_string("Listening",9,1,1);
+	display_string("Listen",6,1,1);
+	display_channel();
 	m_button_on = 1;
+	uint8_t div = 0;
 
 	while (1)
 	{
@@ -168,124 +242,60 @@ void run_receive()
 		if (running == 1)
 		{
 			if (cgrf_data_ready() == 1)
-			{
-				status = cgrf_get_payload(&buffer[0], 3);
-				
-				display_binary(status, 1, 1);
-				display_string(" ", 1, 9, 1);
-				display_number(buffer[0], 1, 2);
-				display_number(buffer[1], 5, 2);
-				display_number(buffer[2], 8, 2);
+			{		
+				cgrf_get_payload(&buffer[0], 3);	
+				div += 1;
 			}
-	
+			
+			// slow the display down.
+			if (div == 4)
+			{
+				div = 0;
+				display_number(buffer[0], 1, 2);
+			}
 		}
 	}
 }
 
 
-void increment_data(uint8_t data[5])
+uint8_t find_channel()
 {
-	uint8_t n = data[2];
+	uint8_t carrier = 0;
+	uint8_t ch = 0;
+	display_string("          ", 10,1,1);
+	cgrf_set_crc_encoding(crc_none);
 	
-	if (n >= 250)
-		n = 0;
-	
-	data[0] = ++n;
-	data[1] = ++n;
-	data[2] = ++n;
-}
-
-void display_register(char * const text, uint8_t const size, uint8_t value)
-{
-	display_string(text, size, 1, 1);
-	display_binary(value, 1, 2);
-	_delay_ms(1000);
-}
-
-void display_address(uint8_t const * const addr)
-{
-	for (uint8_t i = 0; i != 5; i++)
+	while (1)
 	{
-		display_hex(addr[i], i*2+1, 2);
+		for (ch = 0; ch != 128; ch++)
+		{
+			cgrf_set_channel(ch);
+			display_number(ch, 1, 1);
+				
+			for (uint8_t n = 0; n != 100; n++)
+			{
+				uint8_t status = nrf24_get_cd(&carrier);
+				display_hex(status, 5, 1);
+				
+				if (carrier != 0)
+					break;
+
+				_delay_us(10);
+			}
+		
+			if (carrier != 0)
+				break;
+		}
+		
+		if (carrier != 0)
+			break;
 	}
+
+	cgrf_set_crc_encoding(crc_1_byte);
+	
+	display_string("found", 1, 1, 1);
+	display_channel();
+	display_binary(carrier, 1, 2);
+	
+	return carrier;
 }
-
-void display_registers()
-{
-	uint8_t value = 0;
-	
-	value = 0;
-	nrf24_get_config(&value);
-	display_register("CONFIG    ", 10, value);
-
-	value = 0;
-	nrf24_get_en_aa(&value);
-	display_register("EN AA     ", 10, value);
-
-	value = 0;
-	nrf24_get_en_rxaddr(&value);
-	display_register("EN RXADDR ", 10, value);
-
-	value = 0;
-	nrf24_get_setup_aw(&value);
-	display_register("SETUP AW  ", 10, value);
-
-	value = 0;
-	nrf24_get_setup_retr(&value);
-	display_register("SETUP RETR", 10, value);
-
-	value = 0;
-	nrf24_get_rf_ch(&value);
-	display_register("RF CH     ", 10, value);
-
-	value = 0;
-	nrf24_get_rf_setup(&value);
-	display_register("RF SETUP  ", 10, value);
-
-	value = 0;
-	nrf24_get_status(&value);
-	display_register("STATUS    ", 10, value);
-
-	value = 0;
-	nrf24_get_observe_tx(&value);
-	display_register("OBSERVE TX", 10, value);
-
-	value = 0;
-	nrf24_get_rx_pw_p0(&value);
-	display_register("RX PW P0  ", 10, value);
-
-	value = 0;
-	nrf24_get_rx_pw_p1(&value);
-	display_register("RX PW P1  ", 10, value);
-
-	value = 0;
-	nrf24_get_fifo_status(&value);
-	display_register("FIFO STAT ", 10, value);
-
-	value = 0;
-	nrf24_get_dynpd(&value);
-	display_register("DYNPD     ", 10, value);
-
-	value = 0;
-	nrf24_get_feature(&value);
-	display_register("FEATURE   ", 10, value);
-
-
-	uint8_t addr[5] = { 0x00, 0x00, 0x00, 0x00, 0x00 };
-	
-	nrf24_get_tx_address(&addr[0]);
-	display_string("TXADDR    ", 10, 1, 1);
-	display_address(&addr[0]);
-	_delay_ms(1000);
-	
-	nrf24_get_rx_address_pipe0(&addr[0]);
-	display_string("RX ADDR P0", 10, 1, 1);
-	display_address(&addr[0]);
-	_delay_ms(1000);
-
-	nrf24_get_rx_address_pipe1(&addr[0]);
-	display_string("RX ADDR P1", 10, 1, 1);
-	display_address(&addr[0]);
-	_delay_ms(1000);
-}
-

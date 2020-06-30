@@ -6,9 +6,9 @@ cgoled.c
 
 cgrf.c
 
-display.c
+debug.c
 
-led.c
+display.c
 
 main.c
 
