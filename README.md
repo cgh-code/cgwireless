@@ -5,6 +5,7 @@ Atmel Studio C project to send/receive wireless data using the nRF24L01+ module.
 For use with the ATMega328P microcontroller and the nRF24L01+ module.
 Data can be shown on an OLED display.  
 
+[Transmitter](transmitter2.png)
 
 Pinout to the ATMega328P MCU without OLED: -
 
